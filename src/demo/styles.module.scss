@@ -1,0 +1,97 @@
+:global(body) {
+    margin: 0;
+    padding: 0;
+}
+
+.appContainer {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto minmax(100px, 1fr);
+    width: 100vw;
+    height: 100vh;
+}
+
+.appHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.registryVariants {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    .variant {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        input {
+            cursor: pointer;
+        }
+    }
+}
+
+.title {
+    margin: 0;
+}
+
+.tableWrapper {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+$stroke-width: 1px;
+
+.table, .cell, .headerCell {
+    outline: $stroke-width solid #1a1a1a;
+}
+
+.table, .header, .body, .row {
+    gap: $stroke-width;
+}
+
+.table {
+    border-radius: 8px;
+    font-size: 20px;
+    overflow-x: scroll;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width:fit-content;
+    &.striped {
+        background: rgba(70, 70, 200, 0.4);
+    }
+}
+
+.cell {
+    display: flex;
+    flex-shrink: 0;
+    padding: 8px;
+}
+
+.headerCell {
+    display: flex;
+    flex-shrink: 0;
+    padding: 8px;
+    font-weight: 600;
+    background: white;
+}

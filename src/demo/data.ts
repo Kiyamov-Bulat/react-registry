@@ -1,0 +1,58 @@
+import { range } from '../lib';
+import { RegistryHeader } from '../components';
+
+export const HEADERS: RegistryHeader<Record<string, any>>[] = [
+    { key: 'fullName', width: '450px', label: 'Full name' },
+    { key: 'employeeNumber', width: '200px', label: 'Employee number' },
+    { key: 'age', width: '50px', label: 'Age' },
+    { key: 'country', width: '300px', label: 'Country' },
+    { key: 'position', width: '150px', label: 'Position' },
+    { key: 'email', width: '200px', label: 'Email' },
+    { key: 'phone', width: '200px', label: 'Phone' },
+    { key: 'hireDate', width: '200px', label: 'Hire date' },
+    { key: 'birthday', width: '200px', label: 'Birthday' },
+];
+
+export const DATA = range(0, 100)
+    .map(
+        (i) =>
+            [
+                {
+                    fullName: 'Arthur King',
+                    employeeNumber: '12345',
+                    age: '21',
+                    country: 'UK',
+                    position: 'dev',
+                    email: 'arthurking@gmail.com',
+                    phone: '0123456789',
+                    hireDate: '2020-02-25',
+                    birthday: '2020-02-25',
+                    id: i * 10 + 1,
+                },
+                {
+                    fullName: 'Bulat K',
+                    employeeNumber: '45',
+                    age: '26',
+                    country: 'Russia',
+                    position: 'web-dev',
+                    email: 'bulatK@gmail.com',
+                    phone: '0123456789',
+                    hireDate: '2020-02-25',
+                    birthday: '2020-02-25',
+                    id: i * 10 + 2,
+                },
+                {
+                    fullName: 'Syao Han',
+                    employeeNumber: '45667',
+                    age: '35',
+                    country: 'China',
+                    position: 'product owner',
+                    email: 'syaohan@gmail.com',
+                    phone: '0123456789',
+                    hireDate: '2020-02-25',
+                    birthday: '2020-02-25',
+                    id: i * 10 + 3,
+                },
+            ] as const
+    )
+    .flat();
