@@ -2,10 +2,8 @@ import { FC, useState } from 'react';
 import s from './styles.module.scss';
 import { CustomRegistry } from './custom-registry';
 import { RegistryVariant, VariantSwitcher } from './variant-switcher';
-// import { Registry } from '../components';
+import { Registry } from '../components';
 import { DATA, HEADERS } from './data';
-
-const Registry = () => null;
 
 export const DemoApp: FC = () => {
     const [registryVariant, setRegistryVariant] =
@@ -28,6 +26,7 @@ export const DemoApp: FC = () => {
                         data={DATA}
                         headers={HEADERS as any}
                         variant={registryVariant}
+                        sortable={true}
                     />
                 )}
             </div>
