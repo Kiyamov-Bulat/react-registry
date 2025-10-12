@@ -2,7 +2,7 @@ import { range } from '../lib';
 import { RegistryHeader } from '../components';
 
 export const HEADERS: RegistryHeader<Record<string, any>>[] = [
-    { key: 'fullName', width: '450px', label: 'Full name' },
+    { key: 'fullName', label: 'Full name' },
     { key: 'employeeNumber', width: '200px', label: 'Employee number' },
     { key: 'age', width: '50px', label: 'Age' },
     { key: 'country', width: '300px', label: 'Country' },

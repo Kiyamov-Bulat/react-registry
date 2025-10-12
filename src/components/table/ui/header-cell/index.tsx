@@ -4,9 +4,9 @@ import { HeaderCellProps } from '../../types';
 
 export const HeaderCell: FC<HeaderCellProps> = ({
     index,
-    width,
     style,
     children,
+    width = '100px',
     ...restProps
 }) => {
     const ref = useRef<HTMLDivElement>(null);

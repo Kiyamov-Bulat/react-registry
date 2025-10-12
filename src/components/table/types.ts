@@ -22,7 +22,7 @@ export interface HeaderProps extends BaseProps {}
 
 export interface HeaderCellProps extends BaseProps {
     index: number;
-    width: string;
+    width?: string;
 }
 
 export interface RowProps extends BaseProps {

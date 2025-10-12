@@ -49,7 +49,7 @@ export const Registry = <T extends WithId = WithId>({
                             }
                             aria-sort={ariaSort}
                             index={index}
-                            width={header.width ?? '150px'}
+                            width={header.width}
                         >
                             {header.label}
                             {isSortable && sortDir && (

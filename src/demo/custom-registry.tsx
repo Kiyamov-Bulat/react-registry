@@ -10,11 +10,7 @@ export const CustomRegistry: FC = () => {
                     index
                 </Table.HeaderCell>
                 {HEADERS.map(({ key, width }, colIndex) => (
-                    <Table.HeaderCell
-                        key={key}
-                        width={width || '150px'}
-                        index={colIndex}
-                    >
+                    <Table.HeaderCell key={key} width={width} index={colIndex}>
                         {key}
                     </Table.HeaderCell>
                 ))}
