@@ -35,7 +35,6 @@
 
     [data-component="row"] {
         display: flex;
-        border-bottom: var(--table-border-width) solid var(--table-border-color);
         width: fit-content;
 
         &:last-child {
@@ -77,21 +76,16 @@
 .bordered {
     composes: simple; // наследуем от simple
 
-    border: var(--table-border-width) solid var(--table-border-color);
+    outline: var(--table-border-width) solid var(--table-border-color);
 
-    [data-component="row"],
+    [data-component="header"],
+    [data-component="body"],
+    [data-component="row"] {
+        gap: var(--table-border-width);
+    }
+
     [data-component="header-cell"],
     [data-component="cell"] {
-        border: var(--table-border-width) solid var(--table-border-color);
-    }
-
-    [data-component="header-cell"] {
-        font-weight: 600;
-        background-color: var(--table-header-cell-bg);
-    }
-
-    [data-component="cell"],
-    [data-component="header-cell"] {
-        padding: var(--table-cell-padding);
+        outline: var(--table-border-width) solid var(--table-border-color);
     }
 }
