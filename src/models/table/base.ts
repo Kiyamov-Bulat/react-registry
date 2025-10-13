@@ -40,7 +40,6 @@ export class BaseTableEntity
         this.props = {};
         this.id = nanoid();
         this._isDestroyed = false;
-        console.log('CREATE', this);
     }
 
     static empty<T extends typeof BaseTableEntity>(this: T) {

@@ -1,0 +1,11 @@
+.item {
+}
+
+.primary {
+    display: flex;
+    padding: 8px 10px;
+
+    &:hover {
+        background: #0000000f;
+    }
+}

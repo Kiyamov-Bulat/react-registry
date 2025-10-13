@@ -3,7 +3,7 @@ import {
     TableEntity,
     TableEntityEvent,
     TableEntityProps,
-} from '../../../models/types';
+} from '../../../models';
 
 export const useTableEntityProps = <TFrom extends TableEntityProps, TTo>(
     tableEntity: TableEntity | null | undefined,

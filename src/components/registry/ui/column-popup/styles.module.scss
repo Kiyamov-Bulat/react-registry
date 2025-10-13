@@ -1,0 +1,19 @@
+.sortDropdownItem {
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    gap: 12px;
+    align-items: center;
+}
+
+.filterInput {
+    outline: 1px solid #afafaf;
+    border-radius: 8px;
+    padding: 4px 8px;
+    border: none;
+    margin: 4px 8px;
+
+    &:focus {
+        outline: 2px solid #008cff;
+    }
+}

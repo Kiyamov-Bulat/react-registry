@@ -7,7 +7,7 @@ import { DATA, HEADERS } from './data';
 
 export const DemoApp: FC = () => {
     const [registryVariant, setRegistryVariant] =
-        useState<RegistryVariant>('custom');
+        useState<RegistryVariant>('simple');
 
     return (
         <div className={s.appContainer}>

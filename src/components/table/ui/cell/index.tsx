@@ -1,11 +1,11 @@
 import { FC, useCallback, useRef } from 'react';
 import { CellProps } from '../../types';
-import { TableEntityProps } from '../../../../models/types';
 import {
     useTableContext,
     useTableEntity,
     useTableEntityProps,
 } from '../../lib';
+import { TableEntityProps } from '../../../../models';
 
 export const Cell: FC<CellProps> = ({
     colIndex,
@@ -23,7 +23,7 @@ export const Cell: FC<CellProps> = ({
     );
 
     const width = useTableEntityProps(
-        tableModel.getOrCreateHeader()?.getChildByIndex(colIndex),
+        tableModel.getOrCreateHeader().getChildByIndex(colIndex),
         useCallback((props?: TableEntityProps) => props?.width, [])
     );
 

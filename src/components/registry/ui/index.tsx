@@ -2,6 +2,11 @@ import React, { ReactNode } from 'react';
 import { RegistryProps, WithId } from '../types';
 import { useTableSort } from '../lib/table-sort';
 import { Table } from '../../table';
+import { useTableFilter } from '../lib/table-filter';
+import cx from 'classnames';
+import s from './styles.module.scss';
+import { Dropdown } from '../../dropdown';
+import { ColumnPopup } from './column-popup';
 
 export const Registry = <T extends WithId = WithId>({
     data,
@@ -12,10 +17,14 @@ export const Registry = <T extends WithId = WithId>({
     variant,
     renderCell: RenderCell,
 }: RegistryProps<T>) => {
-    const { sort, sortedData, onSort } = useTableSort(data);
-
-    // ===== ФИЛЬТРАЦИЯ (заглушка) =====
-    const processedData = sortedData;
+    // ===== ФИЛЬТРАЦИЯ =====
+    const {
+        filteredData: preSortedData,
+        filterValues,
+        setFilter,
+        clearFilters,
+    } = useTableFilter(data, {});
+    const { sort, sortedData: processedData, onSort } = useTableSort(preSortedData);
 
     return (
         <Table
@@ -29,37 +38,31 @@ export const Registry = <T extends WithId = WithId>({
                     const isSortable = sortable && (header.sortable ?? true);
                     const sortDir =
                         sort.field === header.key ? sort.direction : null;
-                    const ariaSort = sortDir
-                        ? (`${sortDir}ending` as const)
-                        : undefined;
+                    const isFilterable = filterable && (header.filterable ?? true);
+                    const filterValue = String(filterValues[header.key] ?? '');
 
                     return (
                         <Table.HeaderCell
                             key={String(header.key)}
-                            onClick={
-                                isSortable
-                                    ? () => onSort(header.key)
-                                    : undefined
-                            }
+                            className={cx(s.header, { [s.sortable]: isSortable })}
                             data-column={String(header.key)}
                             data-sortable={isSortable || undefined}
                             data-sort-direction={sortDir ?? undefined}
-                            style={
-                                isSortable ? { cursor: 'pointer' } : undefined
-                            }
-                            aria-sort={ariaSort}
                             index={index}
                             width={header.width}
                         >
-                            {header.label}
-                            {isSortable && sortDir && (
-                                <span
-                                    aria-hidden="true"
-                                    data-component={'sort-icon'}
-                                >
-                                    {sortDir === 'asc' ? ' ↑' : ' ↓'}
-                                </span>
-                            )}
+                            <Dropdown>
+                                <Dropdown.Toggle>{header.label}</Dropdown.Toggle>
+                                <ColumnPopup
+                                    filterValue={filterValue}
+                                    isSortable={isSortable}
+                                    isFilterable={isFilterable}
+                                    onSort={(value) => onSort(header.key, value)}
+                                    onFilter={(value) =>
+                                        setFilter(header.key, value)
+                                    }
+                                />
+                            </Dropdown>
                         </Table.HeaderCell>
                     );
                 })}

@@ -2,11 +2,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { SortDirection, SortState, UseTableSortOptions } from '../types';
 
-const defaultComparator = <T extends object>(
-    a: T,
-    b: T,
-    field: keyof T
-): number => {
+const defaultComparator = <T extends object>(a: T, b: T, field: keyof T): number => {
     const aVal = a[field];
     const bVal = b[field];
 
@@ -53,8 +49,16 @@ export const useTableSort = <T extends object>(
         });
     }, [data, sort, customComparator]);
 
-    const onSort = useCallback((field: keyof T) => {
+    const onSort = useCallback((field: keyof T, direction?: SortDirection) => {
         setSort((prev) => {
+            if (direction) {
+                if (prev.field === field && prev.direction === direction) {
+                    return { field: null, direction: null };
+                } else {
+                    return { field, direction };
+                }
+            }
+
             if (prev.field === field) {
                 // Цикл: asc → desc → null
                 switch (prev.direction) {

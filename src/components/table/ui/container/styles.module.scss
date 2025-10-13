@@ -6,6 +6,7 @@
     --table-row-hover-bg: #f9fafb;
     --table-row-even-bg: #fafafa;
     --table-header-cell-bg: #f9fafb;
+    --table-header-cell-align: left;
     --table-border-width: 1px;
 
     width: 100%;
@@ -49,7 +50,7 @@
     [data-component="cell"],
     [data-component="header-cell"] {
         padding: var(--table-cell-padding);
-        text-align: left;
+        text-align: var(--table-header-cell-align);
         flex-shrink: 0;
     }
 
@@ -74,7 +75,7 @@
 }
 
 .bordered {
-    composes: simple; // наследуем от simple
+    composes: simple;
 
     outline: var(--table-border-width) solid var(--table-border-color);
 
