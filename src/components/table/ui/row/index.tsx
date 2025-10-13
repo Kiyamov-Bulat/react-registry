@@ -5,7 +5,9 @@ import { RowProps } from '../../types';
 export const Row: FC<RowProps> = ({ index, children, ...restProps }) => {
     const ref = useRef<HTMLDivElement>(null);
     const rowModel = useTableEntity((tableModel) => {
-        return tableModel.getOrCreateBody().createRow(index, ref);
+        return tableModel
+            .getOrCreateBody()
+            .createRow({ ref, props: { index } });
     });
 
     return (

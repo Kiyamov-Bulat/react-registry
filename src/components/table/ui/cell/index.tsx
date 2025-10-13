@@ -18,12 +18,12 @@ export const Cell: FC<CellProps> = ({
     const cellModel = useTableEntity((tableModel) =>
         tableModel
             .getOrCreateBody()
-            .getOrCreateRow(rowIndex)
-            .getOrCreateCell(colIndex, ref)
+            .getOrCreateRow({ props: { index: rowIndex } })
+            .createCell({ ref, props: { index: colIndex } })
     );
 
     const width = useTableEntityProps(
-        tableModel.getHeader()?.getChild?.(colIndex),
+        tableModel.getOrCreateHeader()?.getChildByIndex(colIndex),
         useCallback((props?: TableEntityProps) => props?.width, [])
     );
 

@@ -11,12 +11,10 @@ export const HeaderCell: FC<HeaderCellProps> = ({
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const cellModel = useTableEntity((tableModel) =>
-        tableModel.getOrCreateHeader().getOrCreateCell(index, ref)
+        tableModel
+            .getOrCreateHeader()
+            .createCell({ ref, props: { index, width } })
     );
-
-    useLayoutEffect(() => {
-        cellModel.updateProps({ width, index });
-    }, [width, index, cellModel]);
 
     return (
         <div

@@ -27,6 +27,7 @@ export const DemoApp: FC = () => {
                         headers={HEADERS as any}
                         variant={registryVariant}
                         sortable={true}
+                        filterable={true}
                     />
                 )}
             </div>

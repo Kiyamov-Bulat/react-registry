@@ -1,4 +1,5 @@
 import {
+    CreateChildParams,
     TableEntity,
     TableEntityEvent,
     TableEntityProps,
@@ -7,12 +8,11 @@ import {
 import { SetStateAction } from 'react';
 import EventEmitter from 'eventemitter3';
 import { nanoid } from 'nanoid';
-import { RowModel } from './row';
-import { Cell } from '../../components/table/ui';
+import { TableEntityChildren } from './table-entity-children';
 
 type BaseTableEntityConstructorParams = {
     parent: TableEntity | null;
-    children: TableEntity[];
+    children: TableEntityChildren;
     ref: TableRef | null;
 };
 
@@ -21,23 +21,26 @@ export class BaseTableEntity
     implements TableEntity
 {
     private readonly id: string;
-    private children: TableEntity[];
+    private readonly children: TableEntityChildren;
     private ref: TableRef | null;
     private parent: TableEntity | null;
     private props: TableEntityProps;
+    private _isDestroyed: boolean;
 
     constructor({
         parent = null,
-        children = [],
+        children,
         ref = null,
     }: Partial<BaseTableEntityConstructorParams> = {}) {
         super();
 
         this.parent = parent;
         this.ref = ref;
-        this.children = children;
+        this.children = children ?? TableEntityChildren.empty();
         this.props = {};
         this.id = nanoid();
+        this._isDestroyed = false;
+        console.log('CREATE', this);
     }
 
     static empty<T extends typeof BaseTableEntity>(this: T) {
@@ -52,13 +55,18 @@ export class BaseTableEntity
         return new this({ parent, ref }) as InstanceType<T>;
     }
 
-    static fromRef<T extends typeof BaseTableEntity>(this: T, ref: TableRef) {
+    static fromRef<T extends typeof BaseTableEntity>(this: T, ref?: TableRef) {
         return new this({ ref }) as InstanceType<T>;
     }
 
     destroy() {
         this.removeAllListeners();
         this.parent?.removeChild(this);
+        this._isDestroyed = true;
+    }
+
+    isDestroyed(): boolean {
+        return this._isDestroyed;
     }
 
     getId(): string {
@@ -69,12 +77,16 @@ export class BaseTableEntity
         return this.parent;
     }
 
-    getChildren(): TableEntity[] {
+    getChildren(): TableEntityChildren {
         return this.children;
     }
 
-    getChild(index: number): TableEntity | null {
-        return this.children[index];
+    getChild(id: string): TableEntity | null {
+        return this.children.get(id);
+    }
+
+    getChildByIndex(index: number): TableEntity | null {
+        return this.children.getByIndex(index);
     }
 
     getRef(): TableRef | null {
@@ -89,22 +101,16 @@ export class BaseTableEntity
         this.parent = parent;
     }
 
-    addChild(child: TableEntity, index?: number): void {
-        const children = this.getChildren();
-
-        if (index === undefined) {
-            children.push(child);
-        } else {
-            children[index] = child;
-        }
+    protected addChild(child: TableEntity): void {
+        this.children.add(child);
 
         child.setParent(this);
     }
 
     removeChild(child: TableEntity): void {
-        this.children = this.children.filter(
-            (nextChild) => nextChild.getId() !== child.getId()
-        );
+        this.children.remove(child);
+
+        child.setParent(null);
     }
 
     getProps(): TableEntityProps {
@@ -124,25 +130,33 @@ export class BaseTableEntity
         throw new Error('Not implemented');
     }
 
-    protected createChild(index?: number, ref?: TableRef): TableEntity {
+    protected createChild({ ref, props }: CreateChildParams = {}): TableEntity {
         const child = this.createEmptyChild();
 
         if (ref) {
-            this.setRef(ref);
+            child.setRef(ref);
+        }
+        if (props) {
+            child.updateProps(props);
         }
 
-        this.addChild(child, index);
+        this.addChild(child);
 
         return child;
     }
 
-    protected getOrCreateChild(index: number, ref?: TableRef): TableEntity {
-        const child = this.getChild(index);
+    protected getOrCreateChild({
+        ref,
+        props,
+    }: CreateChildParams = {}): TableEntity {
+        const index = props?.index;
+        const child =
+            typeof index === 'number' ? this.getChildByIndex(index) : null;
 
         if (child && ref) {
             child.setRef(ref);
         }
 
-        return child ?? this.createChild(index, ref);
+        return child ?? this.createChild({ ref, props });
     }
 }

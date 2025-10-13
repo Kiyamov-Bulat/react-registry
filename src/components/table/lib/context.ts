@@ -25,7 +25,9 @@ export const useTableEntity = <T extends TableEntity>(
     init: (tableModel: TableModel) => T
 ): T => {
     const { tableModel } = useTableContext();
-    const entity = useLazyRef(() => init(tableModel));
+    const entity = useLazyRef(() => init(tableModel), {
+        isReinitializationNeeded: (entity) => entity.isDestroyed(),
+    });
 
     useEffect(() => {
         return () => entity.current?.destroy();

@@ -5,7 +5,7 @@ import { useTableEntity } from '../../lib';
 export const Body: FC<BodyProps> = ({ children, ...restProps }) => {
     const ref = useRef<HTMLDivElement>(null);
     const bodyModel = useTableEntity((tableModel) =>
-        tableModel.getOrCreateBody(ref)
+        tableModel.getOrCreateBody({ ref })
     );
 
     return (

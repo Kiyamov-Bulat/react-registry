@@ -1,8 +1,8 @@
 import { BaseTableEntity } from './base';
 import { TableModel } from './table';
-import { HeaderCellModel } from './header-cell';
+import { HeaderCellModel, HeaderCellProps } from './header-cell';
 import { CellModel } from './cell';
-import { TableEntity, TableRef } from '../types';
+import { CreateChildParams } from '../types';
 
 export class HeaderModel extends BaseTableEntity {
     getGridColumnTemplateStyle() {
@@ -16,7 +16,6 @@ export class HeaderModel extends BaseTableEntity {
     }
 
     saveCellWidth(index: number, width: string) {
-        console.log(index, width);
         this.updateProps((props) => {
             const cellWidthList = [...props.cellWidthList];
 
@@ -31,19 +30,22 @@ export class HeaderModel extends BaseTableEntity {
     }
 
     getCell(index: number): CellModel {
-        return this.getChild(index) as CellModel;
+        return this.getChildByIndex(index) as CellModel;
     }
 
+    // @TODO
     getCellList(): HeaderCellModel[] {
-        return super.getChildren() as HeaderCellModel[];
+        return super.getChildren().asList() as HeaderCellModel[];
     }
 
-    createCell(index?: number, ref?: TableRef): HeaderCellModel {
-        return this.createChild(index, ref) as HeaderCellModel;
+    createCell(params?: CreateChildParams<HeaderCellProps>): HeaderCellModel {
+        return this.createChild(params) as HeaderCellModel;
     }
 
-    getOrCreateCell(index: number, ref?: TableRef): HeaderCellModel {
-        return super.getOrCreateChild(index, ref) as HeaderCellModel;
+    getOrCreateCell(
+        params?: CreateChildParams<HeaderCellProps>
+    ): HeaderCellModel {
+        return super.getOrCreateChild(params) as HeaderCellModel;
     }
 
     protected createEmptyChild(): HeaderCellModel {

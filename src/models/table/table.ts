@@ -1,45 +1,50 @@
 import { BaseTableEntity } from './base';
 import { HeaderModel } from './header';
 import { BodyModel } from './body';
-import { TableEntity, TableRef } from '../types';
+import { CreateChildParams } from '../types';
 
-const HEADER_INDEX = 0;
-const BODY_INDEX = 1;
-type TableChildIndex = typeof HEADER_INDEX | typeof BODY_INDEX;
+type TableChild = HeaderModel | BodyModel;
+type TableChildModel = typeof HeaderModel | typeof BodyModel;
 
 export class TableModel extends BaseTableEntity {
-    getOrCreateHeader(ref?: TableRef): HeaderModel {
-        return this.getOrCreateChild(HEADER_INDEX, ref) as HeaderModel;
+    getOrCreateHeader(params?: CreateChildParams): HeaderModel {
+        return this.getOrCreateTableChild(HeaderModel, params) as HeaderModel;
     }
 
-    getOrCreateBody(ref?: TableRef): BodyModel {
-        return this.getOrCreateChild(BODY_INDEX, ref) as BodyModel;
+    getOrCreateBody(params?: CreateChildParams): BodyModel {
+        return this.getOrCreateTableChild(BodyModel, params) as BodyModel;
     }
 
     getBody(): BodyModel | null {
-        return this.getChildren()[1] || null;
+        return this.getTableChild(BodyModel) as BodyModel;
     }
 
     getHeader(): HeaderModel | null {
-        return this.getChildren()[0] || null;
+        return this.getTableChild(HeaderModel) as HeaderModel;
     }
 
-    getChildren(): [HeaderModel, BodyModel] {
-        return super.getChildren() as [HeaderModel, BodyModel];
+    private getTableChild(model: TableChildModel): TableChild | null {
+        const children = this.getChildren().asList();
+        const child = children.find((child) => child instanceof model);
+
+        return (child as TableChild) || null;
     }
 
-    protected createChild(
-        index?: TableChildIndex,
-        ref?: TableRef
-    ): TableEntity {
-        const child =
-            index === HEADER_INDEX ? HeaderModel.empty() : BodyModel.empty();
+    private getOrCreateTableChild(
+        model: TableChildModel,
+        { ref, props }: CreateChildParams = {}
+    ): TableChild {
+        let child = this.getTableChild(model);
 
-        if (ref) {
-            this.setRef(ref);
+        if (child) {
+            if (ref) child.setRef(ref);
+        } else {
+            child = model.fromRef(ref);
+
+            this.addChild(child);
         }
 
-        this.addChild(child, index);
+        if (props) this.updateProps(props);
 
         return child;
     }

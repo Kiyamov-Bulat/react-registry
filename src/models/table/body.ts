@@ -1,7 +1,7 @@
 import { BaseTableEntity } from './base';
-import { RowModel } from './row';
+import { RowModel, RowProps } from './row';
 import { TableModel } from './table';
-import { TableRef } from '../types';
+import { CreateChildParams } from '../types';
 
 export class BodyModel extends BaseTableEntity {
     getTable(): TableModel {
@@ -9,19 +9,20 @@ export class BodyModel extends BaseTableEntity {
     }
 
     getRow(index: number): RowModel | null {
-        return this.getChild(index) as RowModel;
+        return this.getChildByIndex(index) as RowModel;
     }
 
+    // @TODO
     getRowList(): RowModel[] {
-        return this.getChildren() as RowModel[];
+        return this.getChildren().asList() as RowModel[];
     }
 
-    createRow(index?: number, ref?: TableRef): RowModel {
-        return this.createChild(index, ref) as RowModel;
+    createRow(params?: CreateChildParams<RowProps>): RowModel {
+        return this.createChild(params) as RowModel;
     }
 
-    getOrCreateRow(index: number, ref?: TableRef): RowModel {
-        return this.getOrCreateChild(index, ref) as RowModel;
+    getOrCreateRow(params?: CreateChildParams<RowProps>): RowModel {
+        return this.getOrCreateChild(params) as RowModel;
     }
 
     protected createEmptyChild(): RowModel {
