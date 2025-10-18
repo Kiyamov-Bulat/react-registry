@@ -42,28 +42,30 @@ export const Registry = <T extends WithId = WithId>({
                     const filterValue = String(filterValues[header.key] ?? '');
 
                     return (
-                        <Table.HeaderCell
-                            key={String(header.key)}
-                            className={cx(s.header, { [s.sortable]: isSortable })}
-                            data-column={String(header.key)}
-                            data-sortable={isSortable || undefined}
-                            data-sort-direction={sortDir ?? undefined}
-                            index={index}
-                            width={header.width}
-                        >
-                            <Dropdown>
-                                <Dropdown.Toggle>{header.label}</Dropdown.Toggle>
-                                <ColumnPopup
-                                    filterValue={filterValue}
-                                    isSortable={isSortable}
-                                    isFilterable={isFilterable}
-                                    onSort={(value) => onSort(header.key, value)}
-                                    onFilter={(value) =>
-                                        setFilter(header.key, value)
-                                    }
-                                />
-                            </Dropdown>
-                        </Table.HeaderCell>
+                        <Dropdown key={String(header.key)}>
+                            <Dropdown.Toggle className={s.headerInner}>
+                                <Table.HeaderCell
+                                    className={cx(s.header, {
+                                        [s.sortable]: isSortable,
+                                        [s.filtarable]: isFilterable,
+                                    })}
+                                    data-column={String(header.key)}
+                                    data-sortable={isSortable || undefined}
+                                    data-sort-direction={sortDir ?? undefined}
+                                    index={index}
+                                    width={header.width}
+                                >
+                                    {header.label}
+                                </Table.HeaderCell>
+                            </Dropdown.Toggle>
+                            <ColumnPopup
+                                filterValue={filterValue}
+                                isSortable={isSortable}
+                                isFilterable={isFilterable}
+                                onSort={(value) => onSort(header.key, value)}
+                                onFilter={(value) => setFilter(header.key, value)}
+                            />
+                        </Dropdown>
                     );
                 })}
             </Table.Header>

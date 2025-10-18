@@ -1,12 +1,15 @@
 // Общий контейнер
 .root {
-    --table-cell-padding: 12px 16px;
+    --table-cell-padding: 6px 8px;
     --table-font-size: 20px;
     --table-border-color: #e5e7eb;
     --table-row-hover-bg: #f9fafb;
     --table-row-even-bg: #fafafa;
+    --table-cell-align: left;
     --table-header-cell-bg: #f9fafb;
-    --table-header-cell-align: left;
+    --table-header-cell-align: var(--table-cell-align);
+    --table-header-cell-padding: var(--table-cell-padding);
+    --table-header-cell-weight: 600;
     --table-border-width: 1px;
 
     width: 100%;
@@ -47,16 +50,23 @@
         }
     }
 
-    [data-component="cell"],
-    [data-component="header-cell"] {
-        padding: var(--table-cell-padding);
-        text-align: var(--table-header-cell-align);
+    [data-component="cell"] {
         flex-shrink: 0;
+        padding: var(--table-cell-padding);
+        text-align: var(--table-cell-align);
+        box-sizing: border-box;
     }
 
     [data-component="header-cell"] {
-        font-weight: 600;
+        flex-shrink: 0;
+        font-weight: var(--table-header-cell-weight);
+        padding: var(--table-header-cell-padding);
+        text-align: var(--table-header-cell-align);
         background-color: var(--table-header-cell-bg);
+        box-sizing: border-box;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 

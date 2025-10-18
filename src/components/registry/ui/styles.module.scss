@@ -1,5 +1,7 @@
 .header {
-    &.sortable {
+
+    &.sortable, &.filterable {
         cursor: pointer;
     }
 }
+
