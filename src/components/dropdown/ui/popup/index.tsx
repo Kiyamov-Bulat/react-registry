@@ -4,7 +4,7 @@ import { useDropdownContext } from '../../lib';
 import { usePopupPosition } from '../../lib/popup-position';
 import s from './styles.module.scss';
 import cx from 'classnames';
-import { useOutsideClick } from '../../../../lib';
+import { useHotkey, useOutsideClick } from '../../../../lib';
 
 export const Popup: FC<PopupProps> = ({
     children,
@@ -17,12 +17,12 @@ export const Popup: FC<PopupProps> = ({
     const { anchorRef, opened, setOpened } = useDropdownContext();
     const position = usePopupPosition({ anchorRef, local: !usePortal });
     const ref = useRef<HTMLDivElement>(null);
+    const close = useCallback(() => setOpened(false), []);
+    const closeHookOptions = { enabled: opened };
+    const refList = useMemo(() => [ref, anchorRef], []);
 
-    useOutsideClick(
-        useMemo(() => [ref, anchorRef], []),
-        useCallback(() => setOpened(false), []),
-        { enabled: opened }
-    );
+    useOutsideClick(refList, close, closeHookOptions);
+    useHotkey('Escape', close, closeHookOptions);
 
     if (!opened) return null;
 
