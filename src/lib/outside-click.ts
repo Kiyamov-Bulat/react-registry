@@ -3,16 +3,16 @@ import { RefObject, useEffect } from 'react';
 type RefType = RefObject<HTMLElement | null> | RefObject<HTMLElement | null>[];
 
 type UseOutsideClickOptions = {
-    active?: boolean;
+    enabled?: boolean;
 };
 
 export const useOutsideClick = (
     refs: RefType,
     callback: (event: MouseEvent | TouchEvent) => void,
-    { active = true }: UseOutsideClickOptions = {}
+    { enabled = true }: UseOutsideClickOptions = {}
 ) => {
     useEffect(() => {
-        if (!active) return;
+        if (!enabled) return;
 
         const handleClick = (event: MouseEvent | TouchEvent) => {
             // Приводим refs к массиву для единообразной обработки
@@ -20,8 +20,7 @@ export const useOutsideClick = (
 
             // Проверяем, был ли клик ВНУТРИ любого из целевых элементов
             const isInside = refArray.some(
-                (ref) =>
-                    ref.current && ref.current.contains(event.target as Node)
+                (ref) => ref.current && ref.current.contains(event.target as Node)
             );
 
             // Если клик снаружи — вызываем callback
@@ -39,5 +38,5 @@ export const useOutsideClick = (
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('touchstart', handleClick);
         };
-    }, [refs, callback, active]);
+    }, [refs, callback, enabled]);
 };

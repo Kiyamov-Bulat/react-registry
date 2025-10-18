@@ -21,7 +21,7 @@ export const Popup: FC<PopupProps> = ({
     useOutsideClick(
         useMemo(() => [ref, anchorRef], []),
         useCallback(() => setOpened(false), []),
-        { active: opened }
+        { enabled: opened }
     );
 
     if (!opened) return null;
