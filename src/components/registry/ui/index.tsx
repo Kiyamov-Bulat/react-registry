@@ -23,9 +23,8 @@ export const Registry = <T extends WithId = WithId>({
         filteredData: preSortedData,
         filterValues,
         setFilter,
-        clearFilters,
     } = useTableFilter(data, {});
-    const { sort, sortedData: processedData, onSort } = useTableSort(preSortedData);
+    const { sort, sortedData: processedData, setSort } = useTableSort(preSortedData);
 
     return (
         <Table
@@ -67,7 +66,7 @@ export const Registry = <T extends WithId = WithId>({
                                 filterValue={filterValue}
                                 isSortable={isSortable}
                                 isFilterable={isFilterable}
-                                onSort={(value) => onSort(header.key, value)}
+                                onSort={(value) => setSort(header.key, value)}
                                 onFilter={(value) => setFilter(header.key, value)}
                                 sortDirection={sortDir}
                             />

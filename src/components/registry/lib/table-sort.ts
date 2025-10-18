@@ -74,7 +74,7 @@ export const useTableSort = <T extends object>(
 
     return {
         sortedData,
-        onSort,
+        setSort: onSort,
         sort,
     };
 };
