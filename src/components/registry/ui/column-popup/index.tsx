@@ -10,6 +10,7 @@ export const ColumnPopup: FC<ColumnPopupProps> = ({
     onFilter,
     onSort,
     filterValue,
+    sortDirection,
 }) => {
     return (
         <Dropdown.Popup>
@@ -22,8 +23,16 @@ export const ColumnPopup: FC<ColumnPopupProps> = ({
             )}
             {isSortable && (
                 <>
-                    <SortDropdownItem direction={'asc'} onSort={onSort} />
-                    <SortDropdownItem direction={'desc'} onSort={onSort} />
+                    <SortDropdownItem
+                        direction={'asc'}
+                        onSort={onSort}
+                        activeDirection={sortDirection}
+                    />
+                    <SortDropdownItem
+                        direction={'desc'}
+                        onSort={onSort}
+                        activeDirection={sortDirection}
+                    />
                 </>
             )}
         </Dropdown.Popup>

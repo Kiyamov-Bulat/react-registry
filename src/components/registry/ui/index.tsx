@@ -28,7 +28,7 @@ export const Registry = <T extends WithId = WithId>({
 
     return (
         <Table
-            className={className}
+            className={cx(s.registry, className)}
             variant={variant}
             data-sortable={sortable || undefined}
             data-filterable={filterable || undefined}
@@ -36,10 +36,10 @@ export const Registry = <T extends WithId = WithId>({
             <Table.Header>
                 {headers.map((header, index) => {
                     const isSortable = sortable && (header.sortable ?? true);
-                    const sortDir =
-                        sort.field === header.key ? sort.direction : null;
                     const isFilterable = filterable && (header.filterable ?? true);
                     const filterValue = String(filterValues[header.key] ?? '');
+                    const sortDir =
+                        sort.field === header.key ? sort.direction : null;
 
                     return (
                         <Dropdown key={String(header.key)}>
@@ -64,6 +64,7 @@ export const Registry = <T extends WithId = WithId>({
                                 isFilterable={isFilterable}
                                 onSort={(value) => onSort(header.key, value)}
                                 onFilter={(value) => setFilter(header.key, value)}
+                                sortDirection={sortDir}
                             />
                         </Dropdown>
                     );

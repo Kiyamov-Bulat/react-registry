@@ -75,4 +75,5 @@ export type ColumnPopupProps = {
     onFilter?: (value: string) => void;
     onSort?: (dir: SortDirection) => void;
     filterValue?: string;
+    sortDirection?: SortDirection;
 };

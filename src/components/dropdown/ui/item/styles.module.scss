@@ -5,8 +5,9 @@
     display: flex;
     padding: 8px 10px;
     cursor: pointer;
+    --c-dropdown-item-hover: #0000000f;
 
     &:hover {
-        background: #0000000f;
+        background: var(--c-dropdown-item-hover);
     }
 }

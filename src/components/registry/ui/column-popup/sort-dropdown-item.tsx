@@ -2,15 +2,17 @@ import React, { FC } from 'react';
 import { Dropdown } from '../../../dropdown';
 import { SortDirection } from '../../types';
 import s from './styles.module.scss';
+import cx from 'classnames';
 
 type SortDropdownItemProps = {
     direction: NonNullable<SortDirection>;
     onSort?: (direction: NonNullable<SortDirection>) => void;
+    activeDirection?: SortDirection;
 };
 
 const ASC_ICON = (
     <svg
-        fill="#000000"
+        fill="currentColor"
         width="24px"
         height="24px"
         viewBox="0 0 32 32"
@@ -24,7 +26,7 @@ const ASC_ICON = (
 
 const DESC_ICON = (
     <svg
-        fill="#000000"
+        fill="currentColor"
         width="24px"
         height="24px"
         viewBox="0 0 32 32"
@@ -42,15 +44,18 @@ const ITEM_CONTENT = {
 } as const;
 
 export const SortDropdownItem: FC<SortDropdownItemProps> = ({
-    direction,
     onSort,
+    direction,
+    activeDirection,
 }) => {
     const { icon, value } = ITEM_CONTENT[direction];
 
     return (
         <Dropdown.Item
             onClick={() => onSort?.(direction)}
-            className={s.sortDropdownItem}
+            className={cx(s.sortDropdownItem, {
+                [s.active]: direction === activeDirection,
+            })}
         >
             <div>{icon}</div>
             <div>{value}</div>

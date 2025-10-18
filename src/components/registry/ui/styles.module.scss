@@ -1,5 +1,7 @@
+.registry {
+    --c-registry-primary-active: #008cff;
+}
 .header {
-
     &.sortable, &.filterable {
         cursor: pointer;
     }

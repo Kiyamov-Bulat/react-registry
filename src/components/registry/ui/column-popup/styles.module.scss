@@ -4,6 +4,10 @@
     font-size: 14px;
     gap: 12px;
     align-items: center;
+
+    &.active svg {
+        color: var(--c-registry-primary-active, #008cff);
+    }
 }
 
 .filterInput {
@@ -14,6 +18,6 @@
     margin: 4px 8px;
 
     &:focus {
-        outline: 2px solid #008cff;
+        outline: 2px solid var(--c-registry-primary-active, #008cff);
     }
 }
