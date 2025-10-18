@@ -2,9 +2,15 @@ import { FC } from 'react';
 import s from './styles.module.scss';
 import { TableVariant } from '../components';
 
-export type RegistryVariant = TableVariant | 'custom';
+export type RegistryVariant = TableVariant | 'table-compound-component' | 'custom';
 
-const VARIANTS: RegistryVariant[] = ['custom', 'simple', 'striped', 'bordered'];
+const VARIANTS: RegistryVariant[] = [
+    'table-compound-component',
+    'custom',
+    'simple',
+    'striped',
+    'bordered',
+];
 
 type VariantSwitcherProps = {
     variant: RegistryVariant;

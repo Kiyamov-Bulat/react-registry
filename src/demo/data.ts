@@ -3,7 +3,7 @@ import { RegistryHeader } from '../components';
 
 export const HEADERS: RegistryHeader<Record<string, any>>[] = [
     { key: 'fullName', label: 'Full name' },
-    { key: 'employeeNumber', width: '200px', label: 'Employee number' },
+    { key: 'employeeNumber', width: '100px', label: 'Employee number' },
     { key: 'age', width: '50px', label: 'Age' },
     { key: 'country', width: '300px', label: 'Country' },
     { key: 'position', width: '150px', label: 'Position' },

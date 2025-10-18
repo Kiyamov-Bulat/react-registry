@@ -43,40 +43,15 @@
     box-sizing: border-box;
 }
 
-$stroke-width: 1px;
-
-.table, .cell, .headerCell {
-    outline: $stroke-width solid #1a1a1a;
-}
-
-.table, .header, .body, .row {
-    gap: $stroke-width;
-}
-
-.table {
-    border-radius: 8px;
-    font-size: 20px;
-    overflow-x: scroll;
-    width: 100%;
-    height: 100%;
-}
-
 .header {
-    position: sticky;
-    top: 0;
-    display: flex;
-}
-
-.body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .row {
     display: flex;
     flex-direction: row;
     width:fit-content;
+
     &.striped {
         background: rgba(70, 70, 200, 0.4);
     }
@@ -94,4 +69,27 @@ $stroke-width: 1px;
     padding: 8px;
     font-weight: 600;
     background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.indexCell {
+    position: sticky;
+    left: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
+    z-index: 2;
+
+    &[data-component="cell"] {
+        z-index: 1;
+        background: inherit;
+    }
+}
+
+.age {
+    --table-header-cell-bg: red;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+
+.customRegistry[data-component="table"] {
+    --table-border-width: 5px;
 }
