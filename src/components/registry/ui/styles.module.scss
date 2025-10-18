@@ -1,9 +1,36 @@
 .registry {
     --c-registry-primary-active: #008cff;
 }
-.header {
+
+.headerCell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     &.sortable, &.filterable {
         cursor: pointer;
     }
 }
 
+.indicators {
+    display: flex;
+    align-items: center;
+    color: var(--c-registry-primary-active);
+
+    > * {
+    }
+}
+
+.filterIndicator {
+    position: relative;
+    top: -4px;
+    left: -6px;
+}
+
+.sortIndicator {
+    transition: 0.2s ease transform;
+}
+
+.desc {
+    transform: rotate(180deg);
+}

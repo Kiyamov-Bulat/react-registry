@@ -7,6 +7,7 @@ import cx from 'classnames';
 import s from './styles.module.scss';
 import { Dropdown } from '../../dropdown';
 import { ColumnPopup } from './column-popup';
+import { Indicators } from './indicators';
 
 export const Registry = <T extends WithId = WithId>({
     data,
@@ -45,7 +46,7 @@ export const Registry = <T extends WithId = WithId>({
                         <Dropdown key={String(header.key)}>
                             <Dropdown.Toggle className={s.headerInner}>
                                 <Table.HeaderCell
-                                    className={cx(s.header, {
+                                    className={cx(s.headerCell, {
                                         [s.sortable]: isSortable,
                                         [s.filtarable]: isFilterable,
                                     })}
@@ -56,7 +57,10 @@ export const Registry = <T extends WithId = WithId>({
                                     width={header.width}
                                 >
                                     {header.label}
-                                    <div></div>
+                                    <Indicators
+                                        hasFilter={!!filterValue}
+                                        sort={sortDir}
+                                    />
                                 </Table.HeaderCell>
                             </Dropdown.Toggle>
                             <ColumnPopup
