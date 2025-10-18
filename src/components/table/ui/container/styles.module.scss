@@ -3,6 +3,7 @@
     --table-cell-padding: 6px 8px;
     --table-font-size: 20px;
     --table-border-color: #e5e7eb;
+    --table-row-bg: white;
     --table-row-hover-bg: #f9fafb;
     --table-row-even-bg: #fafafa;
     --table-cell-align: left;
@@ -11,6 +12,8 @@
     --table-header-cell-padding: var(--table-cell-padding);
     --table-header-cell-weight: 600;
     --table-border-width: 1px;
+    --table-body-zindex: 0;
+    --table-header-zindex: 1;
 
     width: 100%;
     font-size: var(--table-font-size);
@@ -30,16 +33,20 @@
         display: flex;
         position: sticky;
         top: 0;
+        z-index: var(--table-header-zindex);
+        width: fit-content;
     }
 
     [data-component="body"] {
         display: flex;
         flex-direction: column;
+        z-index: var(--table-body-zindex);
     }
 
     [data-component="row"] {
         display: flex;
         width: fit-content;
+        background-color: var(--table-row-bg);
 
         &:last-child {
             border-bottom: none;
