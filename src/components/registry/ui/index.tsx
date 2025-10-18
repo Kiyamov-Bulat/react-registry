@@ -52,6 +52,7 @@ export const Registry = <T extends WithId = WithId>({
                                     data-column={String(header.key)}
                                     data-sortable={isSortable || undefined}
                                     data-sort-direction={sortDir ?? undefined}
+                                    data-col-index={index}
                                     index={index}
                                     width={header.width}
                                 >
@@ -100,6 +101,7 @@ export const Registry = <T extends WithId = WithId>({
                                     key={String(header.key)}
                                     data-cell={String(header.key)}
                                     data-row-index={rowIndex}
+                                    data-col-index={colIndex}
                                     colIndex={colIndex}
                                     rowIndex={rowIndex}
                                 >
