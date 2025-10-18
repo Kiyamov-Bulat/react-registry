@@ -56,6 +56,7 @@ export const Registry = <T extends WithId = WithId>({
                                     width={header.width}
                                 >
                                     {header.label}
+                                    <div></div>
                                 </Table.HeaderCell>
                             </Dropdown.Toggle>
                             <ColumnPopup
