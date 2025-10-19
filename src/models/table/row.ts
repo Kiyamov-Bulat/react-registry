@@ -16,7 +16,6 @@ export class RowModel extends BaseTableEntity {
         return this.getChildByIndex(index) as CellModel;
     }
 
-    // @TODO
     getCellList(): CellModel[] {
         return super.getChildren().asList() as CellModel[];
     }

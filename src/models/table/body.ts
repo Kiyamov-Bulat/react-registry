@@ -12,7 +12,6 @@ export class BodyModel extends BaseTableEntity {
         return this.getChildByIndex(index) as RowModel;
     }
 
-    // @TODO
     getRowList(): RowModel[] {
         return this.getChildren().asList() as RowModel[];
     }

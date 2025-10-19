@@ -59,9 +59,13 @@ export class BaseTableEntity
     }
 
     destroy() {
+        if (this.isDestroyed()) return;
+
+        this._isDestroyed = true;
         this.removeAllListeners();
         this.parent?.removeChild(this);
-        this._isDestroyed = true;
+        //@TODO NOT DESTROY?
+        this.children.asList().map((child) => this.removeChild(child));
     }
 
     isDestroyed(): boolean {
@@ -144,13 +148,9 @@ export class BaseTableEntity
         return child;
     }
 
-    protected getOrCreateChild({
-        ref,
-        props,
-    }: CreateChildParams = {}): TableEntity {
+    protected getOrCreateChild({ ref, props }: CreateChildParams = {}): TableEntity {
         const index = props?.index;
-        const child =
-            typeof index === 'number' ? this.getChildByIndex(index) : null;
+        const child = typeof index === 'number' ? this.getChildByIndex(index) : null;
 
         if (child && ref) {
             child.setRef(ref);

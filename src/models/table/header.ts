@@ -33,7 +33,6 @@ export class HeaderModel extends BaseTableEntity {
         return this.getChildByIndex(index) as CellModel;
     }
 
-    // @TODO
     getCellList(): HeaderCellModel[] {
         return super.getChildren().asList() as HeaderCellModel[];
     }
@@ -42,9 +41,7 @@ export class HeaderModel extends BaseTableEntity {
         return this.createChild(params) as HeaderCellModel;
     }
 
-    getOrCreateCell(
-        params?: CreateChildParams<HeaderCellProps>
-    ): HeaderCellModel {
+    getOrCreateCell(params?: CreateChildParams<HeaderCellProps>): HeaderCellModel {
         return super.getOrCreateChild(params) as HeaderCellModel;
     }
 

@@ -20,7 +20,9 @@ export class TableEntityChildren {
     }
 
     asList(): TableEntity[] {
-        return Object.values(this.children);
+        return Object.values(this.children).sort(
+            (a, b) => a.getProps().index - b.getProps().index
+        );
     }
 
     getByIndex(index: number): TableEntity | null {
@@ -31,5 +33,9 @@ export class TableEntityChildren {
         }
 
         return null;
+    }
+
+    reset() {
+        this.children = {};
     }
 }
