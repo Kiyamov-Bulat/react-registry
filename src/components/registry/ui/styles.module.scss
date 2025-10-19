@@ -12,6 +12,12 @@
     }
 }
 
+.label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .indicators {
     display: flex;
     align-items: center;

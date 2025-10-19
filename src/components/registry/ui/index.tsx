@@ -43,11 +43,11 @@ export const Registry = <T extends WithId = WithId>({
 
                     return (
                         <Dropdown key={String(header.key)}>
-                            <Dropdown.Toggle className={s.headerInner}>
+                            <Dropdown.Toggle className={s.headerToggle}>
                                 <Table.HeaderCell
                                     className={cx(s.headerCell, {
                                         [s.sortable]: isSortable,
-                                        [s.filtarable]: isFilterable,
+                                        [s.filterable]: isFilterable,
                                     })}
                                     data-column={String(header.key)}
                                     data-sortable={isSortable || undefined}
@@ -56,7 +56,7 @@ export const Registry = <T extends WithId = WithId>({
                                     index={index}
                                     width={header.width}
                                 >
-                                    {header.label}
+                                    <div className={s.label}>{header.label}</div>
                                     <Indicators
                                         hasFilter={!!filterValue}
                                         sort={sortDir}
