@@ -15,6 +15,7 @@ export const Registry = <T extends WithId = WithId>({
     className,
     variant,
     renderCell: RenderCell,
+    renderHeaderCell: RenderHeaderCell = RegistryHeaderCell,
 }: RegistryProps<T>) => {
     // ===== ФИЛЬТРАЦИЯ =====
     const {
@@ -40,7 +41,7 @@ export const Registry = <T extends WithId = WithId>({
                         sort.field === header.key ? sort.direction : null;
 
                     return (
-                        <RegistryHeaderCell
+                        <RenderHeaderCell
                             key={String(header.key)}
                             index={index}
                             header={header}

@@ -27,7 +27,7 @@ export type RenderHeaderCellProps<T extends object = object> = {
     index: number;
     filterValue: string;
     setFilter: (key: keyof T, value: string) => void;
-    setSort: (key: keyof T, value: SortDirection) => void;
+    setSort: (key: keyof T, value?: SortDirection) => void;
 };
 
 export interface RegistryProps<T extends WithId = WithId> {
@@ -38,7 +38,7 @@ export interface RegistryProps<T extends WithId = WithId> {
     className?: string;
     variant?: TableVariant;
     renderCell?: FC<RenderCellProps>;
-    renderHeaderCell?: FC<RenderHeaderCellProps>;
+    renderHeaderCell?: FC<RenderHeaderCellProps<T>>;
 }
 
 /**** SORT ****/

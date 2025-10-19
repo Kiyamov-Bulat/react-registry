@@ -93,3 +93,8 @@
 .customRegistry[data-component="table"] {
     --table-border-width: 5px;
 }
+
+.customRegistry [data-component="header-cell"] {
+    --table-header-cell-bg: #a1a1df;
+    cursor: pointer;
+}
