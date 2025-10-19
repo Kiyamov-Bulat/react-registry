@@ -1,16 +1,13 @@
 import { FC, useCallback, useRef } from 'react';
 import { CellProps } from '../../types';
-import {
-    useTableContext,
-    useTableEntity,
-    useTableEntityProps,
-} from '../../lib';
+import { useTableContext, useTableEntity, useTableEntityProps } from '../../lib';
 import { TableEntityProps } from '../../../../models';
 
 export const Cell: FC<CellProps> = ({
     colIndex,
     rowIndex,
     children,
+    style,
     ...restProps
 }) => {
     const { tableModel } = useTableContext();
@@ -28,7 +25,12 @@ export const Cell: FC<CellProps> = ({
     );
 
     return (
-        <div ref={ref} style={{ width }} data-component={'cell'} {...restProps}>
+        <div
+            ref={ref}
+            style={{ width, ...style }}
+            data-component={'cell'}
+            {...restProps}
+        >
             {children}
         </div>
     );
