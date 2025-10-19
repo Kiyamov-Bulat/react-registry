@@ -3,9 +3,8 @@
     --table-cell-padding: 6px 8px;
     --table-font-size: 20px;
     --table-border-color: #e5e7eb;
-    --table-row-bg: white;
     --table-row-hover-bg: #f9fafb;
-    --table-row-even-bg: #fafafa;
+    --table-striped-even-bg: #fafafa;
     --table-cell-align: left;
     --table-header-cell-bg: #f9fafb;
     --table-header-cell-align: var(--table-cell-align);
@@ -35,6 +34,7 @@
         top: 0;
         z-index: var(--table-header-zindex);
         width: fit-content;
+        min-width: 100%;
     }
 
     [data-component="body"] {
@@ -46,13 +46,9 @@
     [data-component="row"] {
         display: flex;
         width: fit-content;
-        background-color: var(--table-row-bg);
+        min-width: 100%;
 
-        &:last-child {
-            border-bottom: none;
-        }
-
-        &:hover {
+        &:hover [data-component="cell"] {
             background-color: var(--table-row-hover-bg);
         }
     }
@@ -80,14 +76,8 @@
 .striped {
     composes: simple; // наследуем от simple
 
-    [data-component="row"] {
-        &:nth-child(even) {
-            background-color: var(--table-row-even-bg);
-        }
-
-        &:hover {
-            background-color: var(--table-row-hover-bg);
-        }
+    [data-component="row"]:nth-child(even):not(:hover) [data-component="cell"] {
+        background-color: var(--table-striped-even-bg);
     }
 }
 
