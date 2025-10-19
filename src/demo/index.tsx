@@ -7,8 +7,9 @@ import { DATA, HEADERS } from './data';
 import { CustomRegistry } from './custom-registry';
 
 export const DemoApp: FC = () => {
-    const [registryVariant, setRegistryVariant] =
-        useState<RegistryVariant>('simple');
+    const [registryVariant, setRegistryVariant] = useState<RegistryVariant>(
+        'table-compound-component'
+    );
 
     const getRegistry = () => {
         switch (registryVariant) {

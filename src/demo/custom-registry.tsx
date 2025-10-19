@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { DATA, HEADERS } from './data';
+import { DATA } from './data';
 import { Registry, SortDirection, Table } from '../components';
 import s from './styles.module.scss';
 
@@ -13,6 +13,16 @@ const getSortSymbol = (sortDir: SortDirection) => {
 
     return '';
 };
+
+const HEADERS = [
+    { key: 'fullName', width: 'calc(50% - 30px)', label: 'Full name' },
+    {
+        key: 'employeeNumber',
+        width: 'calc(50% - 30px)',
+        label: 'Employee number',
+    },
+    { key: 'age', width: '50px', label: 'Age' },
+] as const;
 
 export const CustomRegistry: FC = () => {
     return (

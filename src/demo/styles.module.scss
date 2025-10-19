@@ -85,8 +85,11 @@
 }
 
 .age {
+    --age-bg: rgba(255, 0, 0, 0.2);
     --table-header-cell-bg: red;
-    background: rgba(255, 0, 0, 0.2);
+    --table-striped-even-bg: var(--age-bg);
+    --table-row-hover-bg: var(--age-bg);
+    background: var(--age-bg);
 }
 
 
