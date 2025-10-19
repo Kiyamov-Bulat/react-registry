@@ -5,9 +5,7 @@ import { Table } from '../../table';
 import { useTableFilter } from '../lib/table-filter';
 import cx from 'classnames';
 import s from './styles.module.scss';
-import { Dropdown } from '../../dropdown';
-import { ColumnPopup } from './column-popup';
-import { Indicators } from './indicators';
+import { RegistryHeaderCell } from './registry-header-cell';
 
 export const Registry = <T extends WithId = WithId>({
     data,
@@ -42,36 +40,17 @@ export const Registry = <T extends WithId = WithId>({
                         sort.field === header.key ? sort.direction : null;
 
                     return (
-                        <Dropdown key={String(header.key)}>
-                            <Dropdown.Toggle className={s.headerToggle}>
-                                <Table.HeaderCell
-                                    className={cx(s.headerCell, {
-                                        [s.sortable]: isSortable,
-                                        [s.filterable]: isFilterable,
-                                    })}
-                                    data-column={String(header.key)}
-                                    data-sortable={isSortable || undefined}
-                                    data-sort-direction={sortDir ?? undefined}
-                                    data-col-index={index}
-                                    index={index}
-                                    width={header.width}
-                                >
-                                    <div className={s.label}>{header.label}</div>
-                                    <Indicators
-                                        hasFilter={!!filterValue}
-                                        sort={sortDir}
-                                    />
-                                </Table.HeaderCell>
-                            </Dropdown.Toggle>
-                            <ColumnPopup
-                                filterValue={filterValue}
-                                isSortable={isSortable}
-                                isFilterable={isFilterable}
-                                onSort={(value) => setSort(header.key, value)}
-                                onFilter={(value) => setFilter(header.key, value)}
-                                sortDirection={sortDir}
-                            />
-                        </Dropdown>
+                        <RegistryHeaderCell
+                            key={String(header.key)}
+                            index={index}
+                            header={header}
+                            isSortable={isSortable}
+                            isFilterable={isFilterable}
+                            filterValue={filterValue}
+                            sortDirection={sortDir}
+                            setSort={setSort}
+                            setFilter={setFilter}
+                        />
                     );
                 })}
             </Table.Header>
