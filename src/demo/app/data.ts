@@ -1,5 +1,7 @@
-import { range } from '../lib';
-import { RegistryHeader } from '../components';
+import { RegistryHeader } from '../../components';
+
+export const range = (start: number, stop: number, step = 1) =>
+    Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 
 export const HEADERS: RegistryHeader<Record<string, any>>[] = [
     { key: 'fullName', label: 'Full name' },

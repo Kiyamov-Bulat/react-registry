@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import s from './styles.module.scss';
-import { TableVariant } from '../components';
+import { TableVariant } from '../../components';
 
 export type RegistryVariant = TableVariant | 'table-compound-component' | 'custom';
 

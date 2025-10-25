@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Table } from '../components';
 import { DATA, HEADERS } from './data';
 import s from './styles.module.scss';
 import cx from 'classnames';
+import { Table } from '../../components';
 
 export const TableCompoundComponentRegistry: FC = () => {
     return (

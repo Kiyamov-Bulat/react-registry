@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { Registry, RegistryHeader, SortDirection, Table } from '../../components';
 import { DATA } from './data';
-import { Registry, SortDirection, Table } from '../components';
 import s from './styles.module.scss';
 
 const getSortSymbol = (sortDir: SortDirection) => {
@@ -14,7 +14,7 @@ const getSortSymbol = (sortDir: SortDirection) => {
     return '';
 };
 
-const HEADERS = [
+const HEADERS: RegistryHeader<(typeof DATA)[number]>[] = [
     { key: 'fullName', width: 'calc(50% - 30px)', label: 'Full name' },
     {
         key: 'employeeNumber',
@@ -22,18 +22,18 @@ const HEADERS = [
         label: 'Employee number',
     },
     { key: 'age', width: '50px', label: 'Age' },
-] as const;
+];
 
 export const CustomRegistry: FC = () => {
     return (
         <Registry
             data={DATA}
-            headers={HEADERS as any}
+            headers={HEADERS}
             variant={'bordered'}
             sortable={true}
             filterable={false}
             className={s.customRegistry}
-            renderHeaderCell={(props) => {
+            renderHeaderCell={(props: any) => {
                 return (
                     <Table.HeaderCell
                         index={props.index}

@@ -1,46 +1,176 @@
-# Getting Started with Create React App
+# React Registry
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A lightweight, fully typed React component for building powerful data tables — with sorting, filtering, and user-friendly UI out of the box.
 
-## Available Scripts
+[**→ Live Demo**](https://react-registry-azure.vercel.app/)
 
-In the project directory, you can run:
+<img src="src/demo/images/bordered-registry.png" alt="React Registry Demo" width="600px">
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- ✅ **Sorting** — sort data via header popup
+- ✅ **Filtering** — configure filters via header popup
+- ✅ **Fully typed** — TypeScript support included
+- ✅ **Minimum dependencies** — no heavy UI libraries
+- ✅ **Easy to customize** — clean, modular code
+- ✅ **Two usage modes**:
+    - `Registry` — smart component (ready to use)
+    - `Table` — compound UI components (full control)
+- ✅ **Utility hooks**: `useTableSort`, `useTableFilter` for custom logic
 
-### `npm test`
+## 🚀 Quick Start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install:
+```bash
+npm install react-registry
+```
+Basic usage (**Registry**):
+```typescript jsx
+import { Registry } from 'react-registry';
 
-### `npm run build`
+const DATA = [
+    { fullName: 'Harry Potter', employeeNumber: 1, age: 18 }
+];
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const HEADERS = [
+    { key: 'fullName', width: 'calc(50% - 30px)', label: 'Full name' },
+    { key: 'employeeNumber', width: 'calc(50% - 30px)', label: 'Employee number' },
+    { key: 'age', width: '50px', label: 'Age' },
+];
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+function App() {
+    return (
+        <Registry
+            data={DATA}
+            headers={HEADERS}
+            variant="bordered"
+            sortable={true}
+            filterable={true}
+        />
+    );
+}
+```
+_💡 For full control, use the Table compound component and utility hooks (see docs)._
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## 📦 What’s Included
+#### Components:
+- **Registry** — smart table with built-in sorting & filtering
+- **Table** — low-level compound component (**Table.Header**, **Table.Body**, **Table.Row**, etc.)
+- **Dropdown** — utility for popups (**Dropdown.Popup**, **Dropdown.Toggle**, etc.)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Hooks:
+- **useTableFilter** - manage sorting state
+- **useTableSort** - manage filtering logic
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Advanced Usage
+### Custom header rendering (with sort indicators)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Override the default header to show sort direction symbols:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```typescript jsx
+import { DATA, HEADERS } from './constants';
+import { Registry, SortDirection, Table } from 'react-registry';
+import s from './styles.module.scss';
 
-## Learn More
+const getSortSymbol = (sortDir: SortDirection) => {
+    switch (sortDir) {
+    case 'asc':
+        return '↓';
+    case 'desc':
+        return '↑';
+    }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    return '';
+};
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+export const CustomRegistry = () => {
+    return (
+        <Registry
+            data={DATA}
+            headers={HEADERS}
+            variant={'bordered'}
+            sortable={true}
+            filterable={false}
+            className={s.customRegistry}
+            renderHeaderCell={(props) => {
+                return (
+                    <Table.HeaderCell
+                        index={props.index}
+                        width={props.header.width}
+                        onClick={() => props.setSort(props.header.key)}
+                    >
+                        {props.header.label}
+                        {getSortSymbol(props.sortDirection)}
+                    </Table.HeaderCell>
+                );
+            }}
+        />
+    );
+};
+```
+_💡renderHeaderCell gives you full control over header rendering while keeping sorting logic managed by Registry._
+
+### Fully custom table with compound components
+
+Build your own table layout using low-level components:
+
+```typescript jsx
+import { Table } from 'react-registry';
+import { DATA, HEADERS } from './constants';
+import s from './styles.module.scss';
+import { useTableSort } from './table-sort';
+
+function App() {
+    const { setSort, sortedData } = useTableSort(DATA);
+    return (
+        <Table variant={'striped'}>
+            <Table.Header className={s.header}>
+                <Table.HeaderCell index={-1} width={'70px'} className={s.indexCell}>
+                    index
+                </Table.HeaderCell>
+                {HEADERS.map(({ key, width }, colIndex) => (
+                    <Table.HeaderCell
+                        key={key}
+                        width={width}
+                        index={colIndex}
+                        onClick={() => setSort(key)}
+                    >
+                        {key}
+                    </Table.HeaderCell>
+                ))}
+            </Table.Header>
+            <Table.Body>
+                {sortedData.map((row, rowIndex) => (
+                    <Table.Row key={row.id} index={rowIndex} className={s.row}>
+                        <Table.Cell
+                            rowIndex={rowIndex}
+                            colIndex={-1}
+                            className={s.indexCell}
+                        >
+                            {rowIndex}
+                        </Table.Cell>
+                        {HEADERS.map(({ key }, colIndex) => (
+                            <Table.Cell
+                                key={key}
+                                colIndex={colIndex}
+                                rowIndex={rowIndex}
+                            >
+                                {row[key as keyof typeof row]}
+                            </Table.Cell>
+                        ))}
+                    </Table.Row>
+                ))}
+            </Table.Body>
+        </Table>
+    );
+}
+
+```
+
+## 🌐 Live Demo
+See it in action: https://react-registry-azure.vercel.app/
+
+## 📄 License
+MIT © Kiyamov Bulat

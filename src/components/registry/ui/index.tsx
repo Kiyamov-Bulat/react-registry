@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
 import { RegistryProps, WithId } from '../types';
-import { useTableSort } from '../lib/table-sort';
+import { useTableFilter, useTableSort } from '../lib';
 import { Table } from '../../table';
-import { useTableFilter } from '../lib/table-filter';
 import cx from 'classnames';
 import s from './styles.module.scss';
 import { RegistryHeaderCell } from './registry-header-cell';
