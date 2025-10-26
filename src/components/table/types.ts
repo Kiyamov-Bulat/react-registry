@@ -18,6 +18,7 @@ export interface HeaderProps extends BaseProps {}
 export interface HeaderCellProps extends BaseProps {
     index: number;
     width?: string;
+    textEllipsis?: boolean;
 }
 
 export interface RowProps extends BaseProps {

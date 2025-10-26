@@ -4,12 +4,12 @@ import { TableVariant } from '../../components';
 
 export type RegistryVariant = TableVariant | 'table-compound-component' | 'custom';
 
-const VARIANTS: RegistryVariant[] = [
-    'table-compound-component',
-    'custom',
+export const REGISTRY_VARIANTS: RegistryVariant[] = [
     'simple',
     'striped',
     'bordered',
+    'custom',
+    'table-compound-component',
 ];
 
 type VariantSwitcherProps = {
@@ -23,7 +23,7 @@ export const VariantSwitcher: FC<VariantSwitcherProps> = ({
 }) => {
     return (
         <div className={s.registryVariants}>
-            {VARIANTS.map((variant) => (
+            {REGISTRY_VARIANTS.map((variant) => (
                 <div key={variant} className={s.variant}>
                     <label>{variant}</label>
                     <input

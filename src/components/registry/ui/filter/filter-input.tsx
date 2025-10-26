@@ -16,6 +16,7 @@ export const FilterInput: FC<FilterInputProps> = ({
         <input
             type="text"
             value={value}
+            autoFocus={true}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             className={s.filterInput}

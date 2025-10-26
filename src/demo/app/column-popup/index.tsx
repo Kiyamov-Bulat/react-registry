@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { FilterInput } from './filter-input';
-import { Dropdown } from '../../../dropdown';
-import { ColumnPopupProps } from '../../types';
+import { FilterInput } from '../../../components/registry/ui/filter/filter-input';
+import { Dropdown } from '../../../components/dropdown';
+import { ColumnPopupProps } from '../../../components/registry/types';
 import { SortDropdownItem } from './sort-dropdown-item';
 
 export const ColumnPopup: FC<ColumnPopupProps> = ({

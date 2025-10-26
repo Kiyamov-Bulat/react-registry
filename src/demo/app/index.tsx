@@ -1,14 +1,18 @@
 import { FC, useState } from 'react';
 import s from './styles.module.scss';
 import { TableCompoundComponentRegistry } from './table-compound-component-registry';
-import { RegistryVariant, VariantSwitcher } from './variant-switcher';
+import {
+    REGISTRY_VARIANTS,
+    RegistryVariant,
+    VariantSwitcher,
+} from './variant-switcher';
 import { DATA, HEADERS } from './data';
 import { CustomRegistry } from './custom-registry';
 import { Registry } from '../../components';
 
 export const DemoApp: FC = () => {
     const [registryVariant, setRegistryVariant] = useState<RegistryVariant>(
-        'table-compound-component'
+        REGISTRY_VARIANTS[0]
     );
 
     const getRegistry = () => {

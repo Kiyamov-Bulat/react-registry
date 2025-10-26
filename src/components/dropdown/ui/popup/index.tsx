@@ -11,12 +11,19 @@ export const Popup: FC<PopupProps> = ({
     style,
     usePortal,
     className,
+    align = 'center',
     variant = 'primary',
     ...props
 }) => {
     const { anchorRef, opened, setOpened } = useDropdownContext();
-    const position = usePopupPosition({ anchorRef, local: !usePortal });
     const ref = useRef<HTMLDivElement>(null);
+    const position = usePopupPosition({
+        enabled: opened,
+        popupRef: ref,
+        anchorRef,
+        align,
+        local: !usePortal,
+    });
     const close = useCallback(() => setOpened(false), []);
     const closeHookOptions = { enabled: opened };
     const refList = useMemo(() => [ref, anchorRef], []);

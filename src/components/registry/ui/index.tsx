@@ -25,12 +25,7 @@ export const Registry = <T extends WithId = WithId>({
     const { sort, sortedData: processedData, setSort } = useTableSort(preSortedData);
 
     return (
-        <Table
-            className={cx(s.registry, className)}
-            variant={variant}
-            data-sortable={sortable || undefined}
-            data-filterable={filterable || undefined}
-        >
+        <Table className={cx(s.registry, className)} variant={variant}>
             <Table.Header>
                 {headers.map((header, index) => {
                     const isSortable = sortable && (header.sortable ?? true);
