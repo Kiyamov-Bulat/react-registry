@@ -33,8 +33,10 @@ export const RegistryHeaderCell = <T extends object = object>({
             onClick={isSortable ? () => setSort(header.key) : undefined}
             textEllipsis={false}
         >
-            <div className={s.label}>{children ?? header.label}</div>
-            <div className={s.indicators}>
+            <div className={s.label} data-component={'cell-inner'}>
+                {children ?? header.label}
+            </div>
+            <div className={s.indicators} data-component={'indicators'}>
                 {sortDirection && (
                     <Icon
                         size={24}
@@ -44,6 +46,7 @@ export const RegistryHeaderCell = <T extends object = object>({
                         className={cx(s.sortIndicator, {
                             [s.desc]: sortDirection === 'desc',
                         })}
+                        data-component={'sort-indicator'}
                     >
                         <path d="M12 8L12 16" />
                         <path d="M15 11L12.087 8.08704V8.08704C12.039 8.03897 11.961 8.03897 11.913 8.08704V8.08704L9 11" />

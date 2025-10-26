@@ -3,30 +3,26 @@
     top: -5px;
     left: -5px;
     opacity: 0.3;
+    --active-filter-opacity: 1;
+    --hover-filter-opacity: 0.6;
 
     &:hover {
-        opacity: 0.6;
+        opacity: var(--hover-filter-opacity);
     }
 
     &.hasFilter {
-        color: var(--c-registry-primary-active);
-        opacity: 1;
+        color: var(--c-indicator-active, #008cff);
+        opacity: var(--active-filter-opacity);
     }
 }
 
-.sortIndicator {
-    transition: 0.2s ease transform;
-    color: var(--c-registry-primary-active);
-}
-
-.desc {
-    transform: rotate(180deg);
-}
 .filterInput {
     outline: 1px solid #afafaf;
     border-radius: 8px;
     padding: 8px;
     border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.1);
 
     &:focus {
         outline: 2px solid var(--c-registry-primary-active, #008cff);
@@ -34,8 +30,5 @@
 }
 
 .filterPopup {
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.1);
     z-index: 1;
 }

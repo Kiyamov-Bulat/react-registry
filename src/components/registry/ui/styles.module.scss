@@ -1,5 +1,6 @@
 .registry {
     --c-registry-primary-active: #008cff;
+    --indicators-min-height: 24px;
 }
 
 .headerCell {
@@ -7,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
 
-    &.sortable, &.filterable {
+    &.sortable {
         cursor: pointer;
     }
 }
@@ -21,11 +22,13 @@
 .indicators {
     display: flex;
     align-items: center;
+    min-height: var(--indicators-min-height);
+    --c-indicator-active: var(--c-registry-primary-active);
 }
 
 .sortIndicator {
     transition: 0.2s ease transform;
-    color: var(--c-registry-primary-active);
+    color: var(--c-indicator-active);
 }
 
 .desc {
