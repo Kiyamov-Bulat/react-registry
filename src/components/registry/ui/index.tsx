@@ -1,10 +1,16 @@
-import React, { ReactNode } from 'react';
-import { RegistryProps, WithId } from '../types';
+import React from 'react';
+import {
+    RegistryProps,
+    RenderCellProps,
+    RenderHeaderCellInfo,
+    WithId,
+} from '../types';
 import { useTableFilter, useTableSort } from '../lib';
 import { Table } from '../../table';
 import cx from 'classnames';
 import s from './styles.module.scss';
-import { RegistryHeaderCell } from './registry-header-cell';
+import { getRegistryHeaderCellComponents } from '../lib/get-registry-header-cell-components';
+import { getRegistryCellComponents } from '../lib/get-registry-cell-components';
 
 export const Registry = <T extends WithId = WithId>({
     data,
@@ -13,8 +19,8 @@ export const Registry = <T extends WithId = WithId>({
     filterable = false,
     className,
     variant,
-    renderCell: RenderCell,
-    renderHeaderCell: RenderHeaderCell = RegistryHeaderCell,
+    renderCell,
+    renderHeaderCell,
 }: RegistryProps<T>) => {
     // ===== ФИЛЬТРАЦИЯ =====
     const {
@@ -34,19 +40,37 @@ export const Registry = <T extends WithId = WithId>({
                     const sortDir =
                         sort.field === header.key ? sort.direction : null;
 
-                    return (
-                        <RenderHeaderCell
-                            key={String(header.key)}
-                            index={index}
-                            header={header}
-                            isSortable={isSortable}
-                            isFilterable={isFilterable}
-                            filterValue={filterValue}
-                            sortDirection={sortDir}
+                    const { Wrapper, Content, Component } =
+                        getRegistryHeaderCellComponents(renderHeaderCell);
+
+                    const props: RenderHeaderCellInfo<T> = {
+                        index: index,
+                        header: header,
+                        isSortable: isSortable,
+                        isFilterable: isFilterable,
+                        filterValue: filterValue,
+                        sortDirection: sortDir,
+                    };
+
+                    const element = (
+                        <Component
+                            {...props}
                             setSort={setSort}
                             setFilter={setFilter}
-                        />
+                            key={String(header.key)}
+                        >
+                            {Content ? <Content {...props} /> : null}
+                        </Component>
                     );
+
+                    if (Wrapper)
+                        return (
+                            <Wrapper {...props} key={String(header.key)}>
+                                {element}
+                            </Wrapper>
+                        );
+
+                    return element;
                 })}
             </Table.Header>
 
@@ -60,28 +84,32 @@ export const Registry = <T extends WithId = WithId>({
                     >
                         {headers.map((header, colIndex) => {
                             const value = row[header.key];
-                            const cellContent = RenderCell ? (
-                                <RenderCell
-                                    value={value}
-                                    row={row}
-                                    columnKey={header.key as never} // @TODO
-                                />
-                            ) : (
-                                (value as ReactNode) // @TODO
-                            );
+                            const { Wrapper, Component, Content } =
+                                getRegistryCellComponents<T>(renderCell);
+                            const props: RenderCellProps<T> = {
+                                value,
+                                row,
+                                columnKey: header.key,
+                                rowIndex,
+                                colIndex,
+                            };
 
-                            return (
-                                <Table.Cell
-                                    key={String(header.key)}
-                                    data-cell={String(header.key)}
-                                    data-row-index={rowIndex}
-                                    data-col-index={colIndex}
-                                    colIndex={colIndex}
-                                    rowIndex={rowIndex}
-                                >
-                                    {cellContent}
-                                </Table.Cell>
+                            const element = (
+                                <Component {...props} key={String(header.key)}>
+                                    {Content ? (
+                                        <Content {...props} />
+                                    ) : (
+                                        String(value)
+                                    )}
+                                </Component>
                             );
+                            if (Wrapper)
+                                return (
+                                    <Wrapper {...props} key={String(header.key)}>
+                                        {element}
+                                    </Wrapper>
+                                );
+                            return element;
                         })}
                     </Table.Row>
                 ))}

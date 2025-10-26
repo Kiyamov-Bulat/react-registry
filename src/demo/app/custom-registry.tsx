@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Registry, RegistryHeader, SortDirection, Table } from '../../components';
+import { Registry, RegistryHeader, SortDirection } from '../../components';
 import { DATA } from './data';
 import s from './styles.module.scss';
 
@@ -33,18 +33,6 @@ export const CustomRegistry: FC = () => {
             sortable={true}
             filterable={false}
             className={s.customRegistry}
-            renderHeaderCell={(props: any) => {
-                return (
-                    <Table.HeaderCell
-                        index={props.index}
-                        width={props.header.width}
-                        onClick={() => props.setSort(props.header.key)}
-                    >
-                        {props.header.label}
-                        {getSortSymbol(props.sortDirection)}
-                    </Table.HeaderCell>
-                );
-            }}
         />
     );
 };

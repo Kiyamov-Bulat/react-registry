@@ -15,6 +15,7 @@ export const RegistryHeaderCell = <T extends object = object>({
     setFilter,
     filterValue,
     index,
+    children,
 }: RenderHeaderCellProps<T>) => {
     return (
         <Table.HeaderCell
@@ -32,7 +33,7 @@ export const RegistryHeaderCell = <T extends object = object>({
             onClick={isSortable ? () => setSort(header.key) : undefined}
             textEllipsis={false}
         >
-            <div className={s.label}>{header.label}</div>
+            <div className={s.label}>{children ?? header.label}</div>
             <div className={s.indicators}>
                 {sortDirection && (
                     <Icon

@@ -17,18 +17,51 @@ export interface RenderCellProps<T extends object = object> {
     value: any;
     row: T;
     columnKey: keyof T;
+    rowIndex: number;
+    colIndex: number;
+    children?: ReactNode;
 }
 
-export type RenderHeaderCellProps<T extends object = object> = {
+export interface RenderHeaderCellInfo<T extends object = object> {
     header: RegistryHeader<T>;
     isSortable: boolean;
     isFilterable: boolean;
     sortDirection: SortDirection;
     index: number;
     filterValue: string;
+    children?: ReactNode;
+}
+
+export interface RenderHeaderCellProps<T extends object = object>
+    extends RenderHeaderCellInfo<T> {
     setFilter: (key: keyof T, value: string) => void;
     setSort: (key: keyof T, value?: SortDirection) => void;
-};
+}
+
+type RenderComponent<TInfo, TCore> =
+    | {
+          Content: FC<TInfo>;
+      }
+    | {
+          Wrapper: FC<TInfo>;
+      }
+    | {
+          Content: FC<TInfo>;
+          Wrapper: FC<TInfo>;
+      }
+    | {
+          Component: FC<TCore>;
+      };
+
+export type RenderHeaderCell<T extends object = object> = RenderComponent<
+    RenderHeaderCellInfo<T>,
+    RenderHeaderCellProps<T>
+>;
+
+export type RenderCell<T extends object = object> = RenderComponent<
+    RenderCellProps<T>,
+    RenderCellProps<T>
+>;
 
 export interface RegistryProps<T extends WithId = WithId> {
     data: T[];
@@ -37,8 +70,8 @@ export interface RegistryProps<T extends WithId = WithId> {
     filterable?: boolean;
     className?: string;
     variant?: TableVariant;
-    renderCell?: FC<RenderCellProps>;
-    renderHeaderCell?: FC<RenderHeaderCellProps<T>>;
+    renderCell?: RenderCell<T>;
+    renderHeaderCell?: RenderHeaderCell<T>;
 }
 
 /**** SORT ****/
