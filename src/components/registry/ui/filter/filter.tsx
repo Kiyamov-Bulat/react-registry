@@ -31,6 +31,7 @@ export const Filter: FC<FilterProps> = ({ value, onChange }) => {
                 align={'end'}
                 variant={'unstyled'}
                 className={s.filterPopup}
+                usePortal={true}
             >
                 <FilterInput
                     value={value || ''}

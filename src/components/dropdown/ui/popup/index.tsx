@@ -5,6 +5,7 @@ import { usePopupPosition } from '../../lib/popup-position';
 import s from './styles.module.scss';
 import cx from 'classnames';
 import { useHotkey, useOutsideClick } from '../../../../lib';
+import { createPortal } from 'react-dom';
 
 export const Popup: FC<PopupProps> = ({
     children,
@@ -33,7 +34,7 @@ export const Popup: FC<PopupProps> = ({
 
     if (!opened) return null;
 
-    return (
+    const component = (
         <div
             style={{ ...position, ...style }}
             className={cx(s.popup, s[variant], className)}
@@ -44,4 +45,8 @@ export const Popup: FC<PopupProps> = ({
             {children}
         </div>
     );
+
+    if (usePortal) return createPortal(component, document.body);
+
+    return component;
 };

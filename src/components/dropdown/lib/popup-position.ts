@@ -1,5 +1,6 @@
 import { RefObject, useLayoutEffect, useState } from 'react';
 import { PopupAlign } from '../types';
+import { clamp } from '../../../lib/clamp';
 
 type UsePopupPositionParams = {
     anchorRef: RefObject<HTMLElement | null>;
@@ -26,30 +27,31 @@ export const usePopupPosition = ({
         const anchorRect = anchorRef.current.getBoundingClientRect();
         const popupRect = popupRef.current.getBoundingClientRect();
 
-        const getLeft = () => {
+        const getLeft = (initialLeft = 0) => {
             switch (align) {
                 case 'start':
-                    return 0;
+                    return initialLeft;
                 case 'center':
-                    return (anchorRect.width - popupRect.width) / 2;
+                    return initialLeft + (anchorRect.width - popupRect.width) / 2;
                 case 'end':
-                    return anchorRect.width - popupRect.width;
+                    return initialLeft + anchorRect.width - popupRect.width;
             }
         };
+        const getTop = (initialTop = 0) => initialTop + anchorRect.height + GAP;
+        const position = {
+            left: getLeft(anchorRect.left),
+            top: getTop(anchorRect.top),
+        };
 
-        console.log(align, getLeft());
+        position.left = clamp(position.left, 0, window.innerWidth - popupRect.width);
+        position.top = clamp(position.top, 0, window.innerHeight - popupRect.height);
 
         if (local) {
-            setPosition({
-                left: getLeft(),
-                top: anchorRect.height + GAP,
-            });
-        } else {
-            setPosition({
-                left: anchorRect.left,
-                top: anchorRect.top + anchorRect.height + GAP,
-            });
+            position.left = position.left - anchorRect.left;
+            position.top = position.top - anchorRect.top;
         }
+
+        setPosition(position);
     }, [enabled, anchorRef, popupRef, local, align]);
 
     return position;
