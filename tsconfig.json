@@ -14,14 +14,14 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "outDir": "dist",
     "declaration": true,
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": false,
   },
   "include": [
     "src"
