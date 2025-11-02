@@ -2,13 +2,17 @@ import { FC } from 'react';
 import { DATA, HEADERS } from './data';
 import s from './styles.module.scss';
 import cx from 'classnames';
-import { Table } from '../../components';
+import { Table } from '../../src';
 
 export const TableCompoundComponentRegistry: FC = () => {
     return (
-        <Table variant={'striped'}>
+        <Table variant={'striped'} layoutMode={'grid'}>
             <Table.Header className={s.header}>
-                <Table.HeaderCell index={-1} width={'70px'} className={s.indexCell}>
+                <Table.HeaderCell
+                    index={-1}
+                    width={'minmax(50px, 1fr)'}
+                    className={s.indexCell}
+                >
                     index
                 </Table.HeaderCell>
                 {HEADERS.map(({ key, width }, colIndex) => (

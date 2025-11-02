@@ -5,4 +5,3 @@ export * from './header';
 export * from './header-cell';
 export * from './row';
 export * from './table';
-export * from './table-entity-children';

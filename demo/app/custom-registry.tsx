@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Registry, RegistryHeader, SortDirection } from '../../components';
 import { DATA } from './data';
 import s from './styles.module.scss';
+import { Registry, RegistryHeader, SortDirection } from '../../src';
 
 const getSortSymbol = (sortDir: SortDirection) => {
     switch (sortDir) {

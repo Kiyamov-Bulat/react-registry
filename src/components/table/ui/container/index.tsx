@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { TableContext, tableContext } from '../../lib';
 import { TableModel } from '../../../../models';
 import cx from 'classnames';
@@ -10,11 +10,11 @@ export const Container: FC<ContainerProps> = ({
     variant,
     className,
     children,
+    layoutMode = 'fixed',
     ...restProps
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
     const context = useLazyRef<TableContext>(() => {
-        return { tableModel: TableModel.fromRef(ref) };
+        return { tableModel: TableModel.empty(), layoutMode };
     });
 
     return (
@@ -22,6 +22,7 @@ export const Container: FC<ContainerProps> = ({
             <div
                 className={cx(s.root, className, variant && s[variant])}
                 data-component={'table'}
+                ref={context.current.tableModel.getRef()}
                 {...restProps}
             >
                 {children}

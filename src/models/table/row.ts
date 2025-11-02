@@ -1,13 +1,13 @@
-import { BaseTableEntity } from './base';
 import { CellModel, CellProps } from './cell';
 import { BodyModel } from './body';
 import { CreateChildParams } from '../types';
+import { BaseTableEntityWithChildren } from './entity-with-children';
 
 export type RowProps = {
     index: number;
 };
 
-export class RowModel extends BaseTableEntity {
+export class RowModel extends BaseTableEntityWithChildren {
     getBody(): BodyModel {
         return super.getParent() as BodyModel;
     }
@@ -34,6 +34,10 @@ export class RowModel extends BaseTableEntity {
 
     getIndex() {
         return this.getProps().index;
+    }
+
+    removeCell(cell: CellModel) {
+        this.removeChild(cell);
     }
 
     protected createEmptyChild(): CellModel {

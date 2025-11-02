@@ -8,9 +8,11 @@ export interface CellProps extends BaseProps {
 }
 
 export type TableVariant = 'unstyled' | 'simple' | 'striped' | 'bordered';
+export type TableLayout = 'fixed' | 'grid';
 
 export interface ContainerProps extends BaseProps {
     variant?: TableVariant;
+    layoutMode?: TableLayout;
 }
 
 export interface HeaderProps extends BaseProps {}

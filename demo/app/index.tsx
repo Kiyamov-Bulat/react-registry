@@ -8,7 +8,7 @@ import {
 } from './variant-switcher';
 import { DATA, HEADERS } from './data';
 import { CustomRegistry } from './custom-registry';
-import { Registry } from '../../components';
+import { Registry } from '../../src';
 
 export const DemoApp: FC = () => {
     const [registryVariant, setRegistryVariant] = useState<RegistryVariant>(

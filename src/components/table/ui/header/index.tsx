@@ -1,12 +1,18 @@
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import { useTableEntity } from '../../lib';
 import { HeaderProps } from '../../types';
+import { useTableHeaderStyle } from '../../lib/header';
 
-export const Header: FC<HeaderProps> = ({ ...restProps }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const headerModel = useTableEntity((tableModel) =>
-        tableModel.getOrCreateHeader({ ref })
+export const Header: FC<HeaderProps> = ({ style: outerStyle, ...restProps }) => {
+    const headerModel = useTableEntity((tableModel) => tableModel.getHeader());
+    const style = useTableHeaderStyle({ outerStyle });
+
+    return (
+        <div
+            data-component={'header'}
+            ref={headerModel.getRef()}
+            {...restProps}
+            style={style}
+        />
     );
-
-    return <div data-component={'header'} {...restProps} />;
 };

@@ -1,5 +1,5 @@
-import { FC, useLayoutEffect, useRef } from 'react';
-import { useTableEntity } from '../../lib';
+import { FC, useLayoutEffect } from 'react';
+import { useTableContext, useTableEntity } from '../../lib';
 import { HeaderCellProps } from '../../types';
 import s from './styles.module.scss';
 import cx from 'classnames';
@@ -13,19 +13,19 @@ export const HeaderCell: FC<HeaderCellProps> = ({
     textEllipsis = true,
     ...restProps
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
+    const { layoutMode } = useTableContext();
     const cellModel = useTableEntity((tableModel) =>
-        tableModel.getOrCreateHeader().createCell({ ref, props: { index, width } })
+        tableModel.getHeader().getOrCreateCell({ props: { index, width } })
     );
 
     useLayoutEffect(() => {
-        cellModel.updateProps({ index, width });
+        cellModel?.updateProps({ index, width });
     }, [cellModel, index, width]);
 
     return (
         <div
-            ref={ref}
-            style={{ width, ...style }}
+            ref={cellModel.getRef()}
+            style={layoutMode === 'fixed' ? { width, ...style } : style}
             data-component={'header-cell'}
             className={cx(className, {
                 [s.textEllipsis]: textEllipsis,

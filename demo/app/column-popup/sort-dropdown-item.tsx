@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
-import { Dropdown } from '../../../components/dropdown';
-import { SortDirection } from '../../../components/registry/types';
 import s from './styles.module.scss';
 import cx from 'classnames';
-import { Icon } from '../../../components/icon';
+import { Dropdown, Icon, SortDirection } from '../../../src';
 
 type SortDropdownItemProps = {
     direction: NonNullable<SortDirection>;

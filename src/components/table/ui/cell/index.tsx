@@ -1,33 +1,27 @@
-import { FC, useCallback, useRef } from 'react';
+import { FC } from 'react';
 import { CellProps } from '../../types';
-import { useTableContext, useTableEntity, useTableEntityProps } from '../../lib';
-import { TableEntityProps } from '../../../../models';
+import { useTableEntity } from '../../lib';
+import { useTableCellStyle } from '../../lib/cell';
 
 export const Cell: FC<CellProps> = ({
     colIndex,
     rowIndex,
     children,
-    style,
+    style: outerStyle,
     ...restProps
 }) => {
-    const { tableModel } = useTableContext();
-    const ref = useRef<HTMLDivElement>(null);
     const cellModel = useTableEntity((tableModel) =>
         tableModel
-            .getOrCreateBody()
+            .getBody()
             .getOrCreateRow({ props: { index: rowIndex } })
-            .createCell({ ref, props: { index: colIndex } })
+            .getOrCreateCell({ props: { index: colIndex } })
     );
-
-    const width = useTableEntityProps(
-        tableModel.getOrCreateHeader().getChildByIndex(colIndex),
-        useCallback((props?: TableEntityProps) => props?.width, [])
-    );
+    const style = useTableCellStyle({ outerStyle, colIndex });
 
     return (
         <div
-            ref={ref}
-            style={{ width, ...style }}
+            ref={cellModel.getRef()}
+            style={style}
             data-component={'cell'}
             {...restProps}
         >

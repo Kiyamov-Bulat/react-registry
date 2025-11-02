@@ -1,7 +1,9 @@
-import { TableEntity } from '../types';
+import { TableEntity } from '../../types';
 
 export class TableEntityChildren {
     private children: Record<string, TableEntity> = {};
+    private list: TableEntity[] = [];
+    private dirty: boolean = false;
 
     static empty() {
         return new TableEntityChildren();
@@ -12,17 +14,26 @@ export class TableEntityChildren {
     }
 
     remove(child: TableEntity) {
+        this.dirty = true;
         delete this.children[child.getId()];
     }
 
     add(child: TableEntity) {
+        this.dirty = true;
         this.children[child.getId()] = child;
     }
 
     asList(): TableEntity[] {
-        return Object.values(this.children).sort(
-            (a, b) => a.getProps().index - b.getProps().index
-        );
+        if (this.dirty) {
+            const ls = Object.values(this.children);
+
+            this.dirty = false;
+
+            this.list = ls.filter((entity) => !entity.isDestroyed());
+            this.list.sort((a, b) => a.getProps().index - b.getProps().index);
+        }
+
+        return this.list;
     }
 
     getByIndex(index: number): TableEntity | null {
@@ -36,6 +47,7 @@ export class TableEntityChildren {
     }
 
     reset() {
+        this.dirty = true;
         this.children = {};
     }
 }

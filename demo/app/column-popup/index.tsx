@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { FilterInput } from '../../../components/registry/ui/filter/filter-input';
-import { Dropdown } from '../../../components/dropdown';
-import { ColumnPopupProps } from '../../../components/registry/types';
 import { SortDropdownItem } from './sort-dropdown-item';
+import { ColumnPopupProps, Dropdown } from '../../../src';
+import { FilterInput } from '../../../src/components/registry/ui/filter/filter-input';
 
 export const ColumnPopup: FC<ColumnPopupProps> = ({
     isFilterable,

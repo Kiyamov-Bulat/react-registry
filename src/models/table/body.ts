@@ -1,9 +1,9 @@
-import { BaseTableEntity } from './base';
 import { RowModel, RowProps } from './row';
 import { TableModel } from './table';
 import { CreateChildParams } from '../types';
+import { BaseTableEntityWithChildren } from './entity-with-children';
 
-export class BodyModel extends BaseTableEntity {
+export class BodyModel extends BaseTableEntityWithChildren {
     getTable(): TableModel {
         return this.getParent() as TableModel;
     }
@@ -22,6 +22,10 @@ export class BodyModel extends BaseTableEntity {
 
     getOrCreateRow(params?: CreateChildParams<RowProps>): RowModel {
         return this.getOrCreateChild(params) as RowModel;
+    }
+
+    removeRow(row: RowModel) {
+        this.removeChild(row);
     }
 
     protected createEmptyChild(): RowModel {

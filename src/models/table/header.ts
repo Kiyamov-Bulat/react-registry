@@ -1,35 +1,34 @@
-import { BaseTableEntity } from './base';
 import { TableModel } from './table';
 import { HeaderCellModel, HeaderCellProps } from './header-cell';
 import { CellModel } from './cell';
 import { CreateChildParams } from '../types';
+import { BaseTableEntityWithChildren } from './entity-with-children';
+import { CSSProperties } from 'react';
 
-export class HeaderModel extends BaseTableEntity {
-    getGridColumnTemplateStyle() {
-        const widthList = (this.getProps().cellWidthList as string[]) || [];
+export type HeaderProps = {
+    cellWidthList?: string[];
+};
+
+export class HeaderModel extends BaseTableEntityWithChildren {
+    getGridColumnTemplateStyle(): CSSProperties {
+        const widthList = this.getProps().cellWidthList || [];
         const gridTemplateColumns = widthList.reduce(
             (acc, elem) => `${acc} ${elem}`,
             ''
         );
 
-        return { gridTemplateColumns };
+        return { display: 'grid', gridTemplateColumns };
     }
 
-    saveCellWidth(index: number, width: string) {
-        this.updateProps((props) => {
-            const cellWidthList = [...props.cellWidthList];
-
-            cellWidthList[index] = width;
-
-            return { ...props, cellWidthList };
-        });
+    getProps(): HeaderProps {
+        return super.getProps() as HeaderProps;
     }
 
     getTable(): TableModel {
         return this.getParent() as TableModel;
     }
 
-    getCell(index: number): CellModel {
+    getCell(index: number): CellModel | null {
         return this.getChildByIndex(index) as CellModel;
     }
 
@@ -43,6 +42,10 @@ export class HeaderModel extends BaseTableEntity {
 
     getOrCreateCell(params?: CreateChildParams<HeaderCellProps>): HeaderCellModel {
         return super.getOrCreateChild(params) as HeaderCellModel;
+    }
+
+    removeCell(cell: HeaderCellModel) {
+        this.removeChild(cell);
     }
 
     protected createEmptyChild(): HeaderCellModel {
