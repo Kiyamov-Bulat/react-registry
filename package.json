@@ -37,6 +37,7 @@
   "scripts": {
     "build": "vite build --config vite.config.lib.ts",
     "demo": "vite --config vite.config.dev.ts",
+    "demo:build": "vite build --config vite.config.dev.ts",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "ts": "tsc --noEmit"
   },
