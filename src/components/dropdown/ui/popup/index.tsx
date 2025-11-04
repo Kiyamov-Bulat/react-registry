@@ -14,9 +14,18 @@ export const Popup: FC<PopupProps> = ({
     className,
     align = 'center',
     variant = 'primary',
+    anchorRef: outerAnchorRef,
+    opened: outerOpened,
+    onClose,
     ...props
 }) => {
-    const { anchorRef, opened, setOpened } = useDropdownContext();
+    const {
+        anchorRef: innerAnchorRef,
+        opened: innerOpened,
+        setOpened,
+    } = useDropdownContext();
+    const anchorRef = outerAnchorRef ?? innerAnchorRef;
+    const opened = outerOpened ?? innerOpened;
     const ref = useRef<HTMLDivElement>(null);
     const position = usePopupPosition({
         enabled: opened,
@@ -25,7 +34,10 @@ export const Popup: FC<PopupProps> = ({
         align,
         local: !usePortal,
     });
-    const close = useCallback(() => setOpened(false), []);
+    const close = useCallback(() => {
+        setOpened(false);
+        onClose?.();
+    }, [onClose]);
     const closeHookOptions = { enabled: opened };
     const refList = useMemo(() => [ref, anchorRef], []);
 

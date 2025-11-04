@@ -1,0 +1,12 @@
+.customRegistry[data-component="table"] {
+}
+
+
+.customRegistry [data-component="header-cell"] {
+    cursor: pointer;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+}

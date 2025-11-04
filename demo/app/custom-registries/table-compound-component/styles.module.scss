@@ -1,0 +1,43 @@
+.compoundTable {
+    border-radius: 8px;
+    border: 2px solid #ccc;
+}
+
+.header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.row {
+    flex-direction: row;
+    width:fit-content;
+
+    &.striped {
+        background: rgba(70, 70, 200, 0.4);
+    }
+}
+
+
+.indexCell {
+    position: sticky;
+    left: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
+    z-index: 2;
+
+    &[data-component="cell"] {
+        z-index: 1;
+        background: white;
+    }
+}
+
+.age21 {
+    color: orange;
+    font-weight: 600;
+}
+
+.email {
+    --age-bg: rgba(255, 0, 0, 0.2);
+    --table-header-cell-bg: red;
+    --table-striped-even-bg: var(--age-bg);
+    --table-row-hover-bg: var(--age-bg);
+    background: var(--age-bg);
+}

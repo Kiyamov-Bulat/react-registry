@@ -1,14 +1,16 @@
 import { FC, useState } from 'react';
 import s from './styles.module.scss';
-import { TableCompoundComponentRegistry } from './table-compound-component-registry';
 import {
     REGISTRY_VARIANTS,
     RegistryVariant,
     VariantSwitcher,
 } from './variant-switcher';
 import { DATA, HEADERS } from './data';
-import { CustomRegistry } from './custom-registry';
 import { Registry } from '../../src';
+import {
+    RegistryWithPopup,
+    TableCompoundComponentRegistry,
+} from './custom-registries';
 
 export const DemoApp: FC = () => {
     const [registryVariant, setRegistryVariant] = useState<RegistryVariant>(
@@ -20,7 +22,7 @@ export const DemoApp: FC = () => {
             case 'table-compound-component':
                 return <TableCompoundComponentRegistry />;
             case 'custom':
-                return <CustomRegistry />;
+                return <RegistryWithPopup />;
             default:
                 return (
                     <Registry

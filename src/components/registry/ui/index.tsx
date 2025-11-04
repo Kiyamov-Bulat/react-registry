@@ -19,10 +19,10 @@ export const Registry = <T extends WithId = WithId>({
     filterable = false,
     className,
     variant,
+    layoutMode,
     renderCell,
     renderHeaderCell,
 }: RegistryProps<T>) => {
-    // ===== ФИЛЬТРАЦИЯ =====
     const {
         filteredData: preSortedData,
         filterValues,
@@ -31,7 +31,11 @@ export const Registry = <T extends WithId = WithId>({
     const { sort, sortedData: processedData, setSort } = useTableSort(preSortedData);
 
     return (
-        <Table className={cx(s.registry, className)} variant={variant}>
+        <Table
+            className={cx(s.registry, className)}
+            variant={variant}
+            layoutMode={layoutMode}
+        >
             <Table.Header>
                 {headers.map((header, index) => {
                     const isSortable = sortable && (header.sortable ?? true);
@@ -59,7 +63,7 @@ export const Registry = <T extends WithId = WithId>({
                             setFilter={setFilter}
                             key={String(header.key)}
                         >
-                            {Content ? <Content {...props} /> : null}
+                            {Content ? <Content {...props} /> : header.label}
                         </Component>
                     );
 

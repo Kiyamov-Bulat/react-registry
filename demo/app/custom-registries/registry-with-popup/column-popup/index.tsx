@@ -1,7 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode, RefObject } from 'react';
 import { SortDropdownItem } from './sort-dropdown-item';
-import { ColumnPopupProps, Dropdown } from '../../../src';
-import { FilterInput } from '../../../src/components/registry/ui/filter/filter-input';
+import { Dropdown, SortDirection } from '../../../../../src';
+import { FilterInput } from '../../../../../src/components/registry/ui/filter/filter-input';
+
+export type ColumnPopupProps = {
+    children?: ReactNode;
+    isFilterable?: boolean;
+    isSortable?: boolean;
+    onFilter?: (value: string) => void;
+    onSort?: (dir: SortDirection) => void;
+    filterValue?: string;
+    sortDirection?: SortDirection;
+    onClose: () => void;
+    anchorRef: RefObject<HTMLElement | null>;
+    opened: boolean;
+};
 
 export const ColumnPopup: FC<ColumnPopupProps> = ({
     isFilterable,
@@ -10,9 +23,18 @@ export const ColumnPopup: FC<ColumnPopupProps> = ({
     onSort,
     filterValue,
     sortDirection,
+    onClose,
+    anchorRef,
+    opened,
 }) => {
     return (
-        <Dropdown.Popup>
+        <Dropdown.Popup
+            opened={opened}
+            anchorRef={anchorRef}
+            onClose={onClose}
+            usePortal={true}
+            align={'start'}
+        >
             {isFilterable && (
                 <FilterInput
                     value={filterValue || ''}

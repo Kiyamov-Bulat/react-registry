@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { DATA, HEADERS } from './data';
+import { DATA, HEADERS } from '../../data';
 import s from './styles.module.scss';
 import cx from 'classnames';
-import { Table } from '../../src';
+import { Table } from '../../../../src';
 
 export const TableCompoundComponentRegistry: FC = () => {
     return (
-        <Table variant={'striped'} layoutMode={'grid'}>
+        <Table variant={'striped'} layoutMode={'grid'} className={s.compoundTable}>
             <Table.Header className={s.header}>
                 <Table.HeaderCell
                     index={-1}
@@ -20,7 +20,7 @@ export const TableCompoundComponentRegistry: FC = () => {
                         key={key}
                         width={width}
                         index={colIndex}
-                        className={cx({ [s.age]: key === 'age' })}
+                        className={cx({ [s.email]: key === 'email' })}
                     >
                         {key}
                     </Table.HeaderCell>
@@ -42,7 +42,11 @@ export const TableCompoundComponentRegistry: FC = () => {
                                 key={key}
                                 colIndex={colIndex}
                                 rowIndex={rowIndex}
-                                className={cx({ [s.age]: key === 'age' })}
+                                className={cx({
+                                    [s.email]: key === 'email',
+                                    [s.age21]:
+                                        key === 'age' && Number(emp.age) === 21,
+                                })}
                             >
                                 {emp[key as keyof typeof emp]}
                             </Table.Cell>

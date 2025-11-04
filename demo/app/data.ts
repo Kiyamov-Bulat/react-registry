@@ -5,14 +5,14 @@ export const range = (start: number, stop: number, step = 1) =>
 
 export const HEADERS: RegistryHeader<Record<string, any>>[] = [
     { key: 'fullName', label: 'Full name' },
-    { key: 'employeeNumber', width: 'minmax(100px, 1fr)', label: 'Employee number' },
-    // { key: 'age', width: '50px', label: 'Age' },
-    // { key: 'country', width: '300px', label: 'Country' },
-    // { key: 'position', width: '150px', label: 'Position' },
-    // { key: 'email', width: '200px', label: 'Email' },
-    // { key: 'phone', width: '200px', label: 'Phone' },
-    // { key: 'hireDate', width: '200px', label: 'Hire date' },
-    // { key: 'birthday', width: '200px', label: 'Birthday' },
+    { key: 'employeeNumber', width: '100px', label: 'Employee number' },
+    { key: 'age', width: '50px', label: 'Age' },
+    { key: 'country', width: '300px', label: 'Country' },
+    { key: 'position', width: '150px', label: 'Position' },
+    { key: 'email', width: '200px', label: 'Email' },
+    { key: 'phone', width: '200px', label: 'Phone' },
+    { key: 'hireDate', width: '200px', label: 'Hire date' },
+    { key: 'birthday', width: '200px', label: 'Birthday' },
 ];
 
 const getEmployeeData1 = (i: number) => ({
@@ -25,6 +25,7 @@ const getEmployeeData1 = (i: number) => ({
     phone: '0123456789',
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
+    status: 'inactive',
     id: i * 10 + 1,
 });
 const getEmployeeData2 = (i: number) => ({
@@ -37,6 +38,7 @@ const getEmployeeData2 = (i: number) => ({
     phone: '0123456789',
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
+    status: 'active',
     id: i * 10 + 2,
 });
 const getEmployeeData3 = (i: number) => ({
@@ -49,6 +51,7 @@ const getEmployeeData3 = (i: number) => ({
     phone: '0123456789',
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
+    status: 'active',
     id: i * 10 + 3,
 });
 

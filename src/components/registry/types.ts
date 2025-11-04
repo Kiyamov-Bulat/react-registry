@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { TableVariant } from '../table';
+import { TableLayout, TableVariant } from '../table';
 
 /**** REGISTRY ****/
 
@@ -38,20 +38,11 @@ export interface RenderHeaderCellProps<T extends object = object>
     setSort: (key: keyof T, value?: SortDirection) => void;
 }
 
-type RenderComponent<TInfo, TCore> =
-    | {
-          Content: FC<TInfo>;
-      }
-    | {
-          Wrapper: FC<TInfo>;
-      }
-    | {
-          Content: FC<TInfo>;
-          Wrapper: FC<TInfo>;
-      }
-    | {
-          Component: FC<TCore>;
-      };
+type RenderComponent<TProps, TExtendedProps = TProps> = {
+    Content?: FC<Omit<TProps, 'children'>>;
+    Wrapper?: FC<TProps>;
+    Component?: FC<TExtendedProps>;
+};
 
 export type RenderHeaderCell<T extends object = object> = RenderComponent<
     RenderHeaderCellInfo<T>,
@@ -59,7 +50,6 @@ export type RenderHeaderCell<T extends object = object> = RenderComponent<
 >;
 
 export type RenderCell<T extends object = object> = RenderComponent<
-    RenderCellProps<T>,
     RenderCellProps<T>
 >;
 
@@ -70,6 +60,7 @@ export interface RegistryProps<T extends WithId = WithId> {
     filterable?: boolean;
     className?: string;
     variant?: TableVariant;
+    layoutMode?: TableLayout;
     renderCell?: RenderCell<T>;
     renderHeaderCell?: RenderHeaderCell<T>;
 }
@@ -110,15 +101,3 @@ export interface UseTableFilterOptions<T> {
     initialFilterValues?: FilterValueDict<T>;
     customFilterPredicate?: FilterPredicate<T>;
 }
-
-/**** CONTEXT-MENU ****/
-
-export type ColumnPopupProps = {
-    children?: ReactNode;
-    isFilterable?: boolean;
-    isSortable?: boolean;
-    onFilter?: (value: string) => void;
-    onSort?: (dir: SortDirection) => void;
-    filterValue?: string;
-    sortDirection?: SortDirection;
-};

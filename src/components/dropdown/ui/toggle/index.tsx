@@ -1,7 +1,6 @@
 import { FC, MouseEventHandler } from 'react';
 import { ToggleProps } from '../../types';
 import { useDropdownContext } from '../../lib';
-import cx from 'classnames';
 
 export const Toggle: FC<ToggleProps> = ({
     children,
@@ -19,7 +18,7 @@ export const Toggle: FC<ToggleProps> = ({
     return (
         <div
             ref={anchorRef}
-            className={cx(className)}
+            className={className}
             onClick={handleClick}
             data-component={'toggle'}
             {...props}

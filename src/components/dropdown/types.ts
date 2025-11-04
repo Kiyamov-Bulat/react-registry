@@ -1,4 +1,5 @@
 import { BaseProps } from '../types';
+import { RefObject } from 'react';
 
 export interface DropdownProps extends BaseProps {}
 
@@ -16,6 +17,9 @@ export interface PopupProps extends BaseProps {
     usePortal?: boolean;
     variant?: PopupVariant;
     align?: PopupAlign;
+    anchorRef?: RefObject<HTMLElement | null>;
+    opened?: boolean;
+    onClose?: () => void;
 }
 
 export interface ToggleProps extends BaseProps {}
