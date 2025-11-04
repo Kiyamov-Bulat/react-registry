@@ -8,9 +8,8 @@ A lightweight, fully typed React component for building powerful data tables —
 
 ## ✨ Features
 
-
-- ✅ **Sorting** — sort data via header popup
-- ✅ **Filtering** — configure filters via header popup
+- ✅ **Column sorting** — click a column header to sort
+- ✅ **Per-column filtering** — click the filter icon in any header to filter that column
 - ✅ **Fully typed** — TypeScript support included
 - ✅ **Minimum dependencies** — no heavy UI libraries
 - ✅ **Easy to customize** — clean, modular code
@@ -27,19 +26,19 @@ npm install react-registry
 ```
 Basic usage (**Registry**):
 ```typescript jsx
-import { Registry } from 'react-registry';
+import { Registry, RegistryHeader } from 'react-registry';
 
 const DATA = [
-    { fullName: 'Harry Potter', employeeNumber: 1, age: 18 }
+    { id: 1, fullName: 'Harry Potter', employeeNumber: 1, age: 18 },
 ];
 
-const HEADERS = [
-    { key: 'fullName', width: 'calc(50% - 30px)', label: 'Full name' },
-    { key: 'employeeNumber', width: 'calc(50% - 30px)', label: 'Employee number' },
+const HEADERS: RegistryHeader<(typeof DATA)[number]>[] = [
+    { key: 'fullName', width: 'calc(50% - 26px)', label: 'Full name' },
+    { key: 'employeeNumber', width: 'calc(50% - 26px)', label: 'Employee number' },
     { key: 'age', width: '50px', label: 'Age' },
 ];
 
-function App() {
+export function App() {
     return (
         <Registry
             data={DATA}
@@ -67,11 +66,13 @@ _💡 For full control, use the Table compound component and utility hooks (see 
 ## Advanced Usage
 ### Custom header rendering (with sort indicators)
 
-Override the default header to show sort direction symbols:
+Override the default header to add a popup component and display sort direction symbols:
 
 ```typescript jsx
+import { Registry, RegistryHeader, SortDirection, Table } from 'react-registry';
 import { DATA, HEADERS } from './constants';
-import { Registry, SortDirection, Table } from 'react-registry';
+import { useCallback, useRef, useState } from 'react';
+import { ColumnPopup } from './column-popup';
 import s from './styles.module.scss';
 
 const getSortSymbol = (sortDir: SortDirection) => {
@@ -85,30 +86,69 @@ const getSortSymbol = (sortDir: SortDirection) => {
     return '';
 };
 
-export const RegistryWithPopup = () => {
+const getStatusSymbol = (status: string) => (status === 'active' ? '✅' : '❌');
+
+export function App() {
     return (
         <Registry
             data={DATA}
             headers={HEADERS}
             variant={'bordered'}
+            layoutMode={'grid'}
             sortable={true}
-            filterable={false}
+            filterable={true}
             className={s.customRegistry}
-            renderHeaderCell={(props) => {
-                return (
-                    <Table.HeaderCell
-                        index={props.index}
-                        width={props.header.width}
-                        onClick={() => props.setSort(props.header.key)}
-                    >
-                        {props.header.label}
-                        {getSortSymbol(props.sortDirection)}
-                    </Table.HeaderCell>
-                );
+            renderHeaderCell={{
+                Component: ({ header, setFilter, setSort, ...props }) => {
+                    const ref = useRef<HTMLDivElement>(null);
+                    const [opened, setOpened] = useState(false);
+                    const toggle = useCallback(() => setOpened((prev) => !prev), []);
+                    const filter = (value: string) =>
+                        setFilter(header.key, value);
+
+                    const sort = (sortDirection: SortDirection) =>
+                        setSort(header.key, sortDirection);
+
+                    return (
+                        <Table.HeaderCell
+                            index={props.index}
+                            width={header.width}
+                            onClick={toggle}
+                        >
+                            <div ref={ref}>
+                                {props.children}
+                                {getSortSymbol(props.sortDirection)}
+                            </div>
+                            {/* CUSTOM POPUP (see: Dropdown.Popup) */}
+                            <ColumnPopup
+                                {...props}
+                                onFilter={filter}
+                                onSort={sort}
+                                onClose={toggle}
+                                anchorRef={ref}
+                                opened={opened}
+                            />
+                        </Table.HeaderCell>
+                    );
+                },
+            }}
+            renderCell={{
+                Content: (props) => {
+                    if (props.columnKey === 'status')
+                        return (
+                            <div className={s.status}>
+                                <div>{props.value}</div>
+                                {getStatusSymbol(props.value)}
+                            </div>
+                        );
+
+                    return props.value;
+                },
             }}
         />
     );
 };
+
 ```
 _💡renderHeaderCell gives you full control over header rendering while keeping sorting logic managed by Registry._
 
@@ -117,12 +157,11 @@ _💡renderHeaderCell gives you full control over header rendering while keeping
 Build your own table layout using low-level components:
 
 ```typescript jsx
-import { Table } from 'react-registry';
+import { Table, useTableSort } from 'react-registry';
 import { DATA, HEADERS } from './constants';
 import s from './styles.module.scss';
-import { useTableSort } from './table-sort';
 
-function App() {
+export function App() {
     const { setSort, sortedData } = useTableSort(DATA);
     return (
         <Table variant={'striped'}>
