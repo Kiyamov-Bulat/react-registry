@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC } from 'react';
 import { TableContext, tableContext } from '../../lib';
 import { TableModel } from '../../../../models';
 import cx from 'classnames';

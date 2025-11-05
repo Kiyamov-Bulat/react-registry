@@ -9,6 +9,11 @@ export interface CellProps extends BaseProps {
     colIndex: number;
     /** Zero-based row index of the cell. */
     rowIndex: number;
+    /**
+     * Whether long text should be truncated with an ellipsis.
+     * @default true
+     */
+    textEllipsis?: boolean;
 }
 
 /** Visual styling variants for the table. */

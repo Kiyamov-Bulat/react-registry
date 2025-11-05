@@ -4,12 +4,12 @@ export const range = (start: number, stop: number, step = 1) =>
     Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 
 export const HEADERS: RegistryHeader<Record<string, any>>[] = [
-    { key: 'fullName', label: 'Full name' },
-    { key: 'employeeNumber', width: '100px', label: 'Employee number' },
-    { key: 'age', width: '50px', label: 'Age' },
+    { key: 'fullName', label: 'Full name', width: '150px' },
+    { key: 'employeeNumber', width: '200px', label: 'Employee number' },
+    { key: 'age', width: '80px', label: 'Age' },
     { key: 'country', width: '300px', label: 'Country' },
     { key: 'position', width: '150px', label: 'Position' },
-    { key: 'email', width: '200px', label: 'Email' },
+    { key: 'email', width: '75px', label: 'Email' },
     { key: 'phone', width: '200px', label: 'Phone' },
     { key: 'hireDate', width: '200px', label: 'Hire date' },
     { key: 'birthday', width: '200px', label: 'Birthday' },
