@@ -1,6 +1,5 @@
 # Игнорируем всё, кроме dist/
 *
-
 !/dist
 !/dist/**
 !README.md
