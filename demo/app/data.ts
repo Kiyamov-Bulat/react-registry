@@ -42,12 +42,12 @@ const getEmployeeData1 = (i: number) => ({
     id: i * 10 + 1,
 });
 const getEmployeeData2 = (i: number) => ({
-    fullName: 'Bulat K',
+    fullName: 'Alex Naimed',
     employeeNumber: '45',
     age: '26',
     country: 'Russia',
     position: 'web-dev',
-    email: 'bulatK@gmail.com',
+    email: 'alexn@gmail.com',
     phone: '0123456789',
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
