@@ -4,7 +4,7 @@ A lightweight, fully typed React component for building powerful data tables —
 
 [**→ Live Demo**](https://react-registry-azure.vercel.app/)
 
-<img src="/demo/images/bordered-registry.png" alt="React Registry Demo" width="600px">
+<img src="/demo/images/registry/bordered.png" alt="React Registry Demo" width="600px">
 
 ## ✨ Features
 
