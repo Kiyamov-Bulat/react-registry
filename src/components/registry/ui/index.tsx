@@ -103,7 +103,7 @@ export const Registry = <T extends WithId = WithId>({
                                     {Content ? (
                                         <Content {...props} />
                                     ) : (
-                                        String(value)
+                                        String(value ?? '')
                                     )}
                                 </Component>
                             );
