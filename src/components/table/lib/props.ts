@@ -33,14 +33,14 @@ export const useTableEntityChildrenProps = <TTo>(
     tableEntity: NullableTableContainer,
     { enabled, selector }: UseTableEntityPropsOptions<TTo>
 ) => {
-    const childList = useTableEntityChildren(tableEntity) || [];
-    const getPropsList = () => childList.map((child) => child.getProps());
+    const childList = useTableEntityChildren(tableEntity);
+    const getPropsList = () => childList?.map((child) => child.getProps());
     const [state, setState] = useState(() => selector(getPropsList()));
 
     useLayoutEffect(() => {
-        if (!enabled) return;
+        if (!enabled || !childList) return;
 
-        const propsList = getPropsList();
+        const propsList = getPropsList() || [];
         const offList: (() => void)[] = [];
 
         for (let i = 0; i < propsList.length; ++i) {
