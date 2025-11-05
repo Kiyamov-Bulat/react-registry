@@ -1,4 +1,4 @@
-import { FC, useCallback, useRef, useState } from 'react';
+import { FC, useCallback, useId, useRef, useState } from 'react';
 import { DATA } from '../../data';
 import s from './styles.module.scss';
 import { Registry, RegistryHeader, SortDirection, Table } from '../../../../src';
@@ -26,13 +26,34 @@ const HEADERS: RegistryHeader<(typeof DATA)[number]>[] = [
     },
     { key: 'age', width: '50px', label: 'Age' },
     { key: 'status', width: '150px', label: 'Status' },
+    { key: 'country', width: '300px', label: 'Country' },
+    { key: 'position', width: 'minmax(150px, 1fr)', label: 'Position' },
+    { key: 'email', width: '200px', label: 'Email' },
+    { key: 'phone', width: '200px', label: 'Phone' },
+    { key: 'hireDate', width: '200px', label: 'Hire date' },
+    { key: 'birthday', width: '200px', label: 'Birthday' },
+    { key: 'rank', label: 'Rank' },
+    {
+        key: 'work_experience',
+        label: 'Work experience',
+        width: 'minmax(150px, 1fr)',
+    },
+    { key: 'gender', label: 'Gender' },
+    { key: 'education', label: 'Education', width: 'minmax(150px, 1fr)' },
+    { key: 'address', label: 'Address' },
+    { key: 'marital_status', label: 'Marital status' },
 ];
 
 export const RegistryWithPopup: FC = () => {
+    const [headers, setHeaders] = useState(HEADERS);
+    const removeHeader = (key: string) => {
+        setHeaders((prev) => prev.filter((header) => header.key !== key));
+    };
+
     return (
         <Registry
             data={DATA}
-            headers={HEADERS}
+            headers={headers}
             variant={'bordered'}
             layoutMode={'grid'}
             sortable={true}
@@ -55,7 +76,7 @@ export const RegistryWithPopup: FC = () => {
                             width={header.width}
                             onClick={toggle}
                         >
-                            <div ref={ref}>
+                            <div ref={ref} className={s.label}>
                                 {props.children}
                                 {getSortSymbol(props.sortDirection)}
                             </div>
@@ -67,6 +88,15 @@ export const RegistryWithPopup: FC = () => {
                                 anchorRef={ref}
                                 opened={opened}
                             />
+                            <div
+                                className={s.removeBtn}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeHeader(header.key);
+                                }}
+                            >
+                                🗑️
+                            </div>
                         </Table.HeaderCell>
                     );
                 },

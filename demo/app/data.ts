@@ -13,6 +13,13 @@ export const HEADERS: RegistryHeader<Record<string, any>>[] = [
     { key: 'phone', width: '200px', label: 'Phone' },
     { key: 'hireDate', width: '200px', label: 'Hire date' },
     { key: 'birthday', width: '200px', label: 'Birthday' },
+    { key: 'rank', label: 'Rank' },
+    { key: 'work_experience', label: 'Work experience' },
+    { key: 'gender', label: 'Gender' },
+    { key: 'education', label: 'Education' },
+    { key: 'address', label: 'Address' },
+    { key: 'status', label: 'Status' },
+    { key: 'marital_status', label: 'Marital status' },
 ];
 
 const getEmployeeData1 = (i: number) => ({
@@ -25,6 +32,12 @@ const getEmployeeData1 = (i: number) => ({
     phone: '0123456789',
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
+    rank: '1',
+    work_experience: '1 year',
+    gender: 'male',
+    education: 'Hogwarts 2 years',
+    address: 'England',
+    marital_status: 'ugift',
     status: 'inactive',
     id: i * 10 + 1,
 });
@@ -39,6 +52,12 @@ const getEmployeeData2 = (i: number) => ({
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
     status: 'active',
+    rank: '1',
+    work_experience: '10 year',
+    gender: 'male',
+    education: 'Hogwarts 3 years',
+    address: 'Russia',
+    marital_status: 'ugift',
     id: i * 10 + 2,
 });
 const getEmployeeData3 = (i: number) => ({
@@ -52,6 +71,12 @@ const getEmployeeData3 = (i: number) => ({
     hireDate: '2020-02-25',
     birthday: '2020-02-25',
     status: 'active',
+    rank: '1',
+    work_experience: '7 year',
+    gender: 'male',
+    education: 'Hogwarts 3 years',
+    address: 'China',
+    marital_status: 'ugift',
     id: i * 10 + 3,
 });
 
@@ -61,6 +86,6 @@ const getEmployees = (i: number) => [
     getEmployeeData3(i),
 ];
 
-export const DATA = range(0, 100)
+export const DATA = range(0, 15)
     .map((i) => getEmployees(i))
     .flat();

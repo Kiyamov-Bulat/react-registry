@@ -22,8 +22,11 @@ export const useEmitter = <T>({
     useLayoutEffect(() => {
         if (!enabled) return;
 
-        const setStateWrapper = (...args: unknown[]) =>
-            setState((prevState) => selector(...args) ?? prevState);
+        const setStateWrapper = (...args: unknown[]) => {
+            queueMicrotask(() =>
+                setState((prevState) => selector(...args) ?? prevState)
+            );
+        };
 
         setStateWrapper();
 

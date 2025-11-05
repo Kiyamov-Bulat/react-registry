@@ -4,6 +4,14 @@
 
 .customRegistry [data-component="header-cell"] {
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .status {

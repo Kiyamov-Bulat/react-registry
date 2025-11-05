@@ -45,13 +45,18 @@ export const useTableEntityChildrenProps = <TTo>(
 
         for (let i = 0; i < propsList.length; ++i) {
             const child = childList[i];
-            const setStateWrapper = () =>
-                setState((prevState) => {
-                    const newPropsList = [...propsList];
+            const setStateWrapper = () => {
+                const update = () => {
+                    setState((prevState) => {
+                        const newPropsList = [...propsList];
 
-                    newPropsList[i] = child.getProps() ?? newPropsList[i];
-                    return selector(newPropsList) ?? prevState;
-                });
+                        newPropsList[i] = child.getProps() ?? newPropsList[i];
+                        return selector(newPropsList) ?? prevState;
+                    });
+                };
+
+                queueMicrotask(update);
+            };
 
             child.on(TableEntityEvent.UPDATE_PROPS, setStateWrapper);
             offList.push(() =>
