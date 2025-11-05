@@ -1,9 +1,9 @@
 import { RowModel, RowProps } from './row';
 import { TableModel } from './table';
 import { CreateChildParams } from '../types';
-import { BaseTableEntityWithChildren } from './entity-with-children';
+import { BaseTableContainer } from './table-container';
 
-export class BodyModel extends BaseTableEntityWithChildren {
+export class BodyModel extends BaseTableContainer {
     getTable(): TableModel {
         return this.getParent() as TableModel;
     }
@@ -13,7 +13,7 @@ export class BodyModel extends BaseTableEntityWithChildren {
     }
 
     getRowList(): RowModel[] {
-        return this.getChildren().asList() as RowModel[];
+        return this.getChildren() as RowModel[];
     }
 
     createRow(params?: CreateChildParams<RowProps>): RowModel {

@@ -1,6 +1,6 @@
 import {
     NullableTableEntity,
-    NullableTableEntityWithChildren,
+    NullableTableContainer,
     TableEntityEvent,
 } from '../../../models';
 import { EmitterSelector, useEmitter } from './emitter';
@@ -30,7 +30,7 @@ export const useTableEntityProps = <TTo>(
 };
 
 export const useTableEntityChildrenProps = <TTo>(
-    tableEntity: NullableTableEntityWithChildren,
+    tableEntity: NullableTableContainer,
     { enabled, selector }: UseTableEntityPropsOptions<TTo>
 ) => {
     const childList = useTableEntityChildren(tableEntity) || [];

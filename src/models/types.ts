@@ -1,6 +1,5 @@
 import { RefObject, SetStateAction } from 'react';
 import EventEmitter from 'eventemitter3';
-import { TableEntityChildren } from './table/entity-with-children';
 
 export type TableRef = RefObject<HTMLDivElement | null>;
 
@@ -12,9 +11,9 @@ export type CreateChildParams<T extends TableEntityProps = TableEntityProps> = {
 
 export interface TableEntity extends EventEmitter {
     getId(): string;
-    getParent(): TableEntity | null;
+    getParent(): TableContainer | null;
     getRef(): TableRef;
-    setParent(parent: TableEntity | null): void;
+    setParent(parent: TableContainer | null): void;
     getProps(): TableEntityProps;
     updateProps(props: SetStateAction<Partial<TableEntityProps>>): void;
     restore(): void;
@@ -22,8 +21,10 @@ export interface TableEntity extends EventEmitter {
     isDestroyed(): boolean;
 }
 
-export interface TableEntityWithChildren extends TableEntity {
-    getChildren(): TableEntityChildren;
+export interface TableContainer extends TableEntity {
+    getChildren(): TableEntity[];
+    addChild?(child: TableEntity): void;
+    removeChild?(child: TableEntity): void;
 }
 
 export enum TableEntityEvent {
@@ -32,7 +33,4 @@ export enum TableEntityEvent {
 }
 
 export type NullableTableEntity = TableEntity | null | undefined;
-export type NullableTableEntityWithChildren =
-    | TableEntityWithChildren
-    | null
-    | undefined;
+export type NullableTableContainer = TableContainer | null | undefined;

@@ -1,10 +1,16 @@
-import { TableEntity, TableEntityEvent, TableEntityProps, TableRef } from '../types';
+import {
+    TableContainer,
+    TableEntity,
+    TableEntityEvent,
+    TableEntityProps,
+    TableRef,
+} from '../types';
 import { createRef, SetStateAction } from 'react';
 import EventEmitter from 'eventemitter3';
 import { nanoid } from 'nanoid';
 
 type BaseTableEntityConstructorParams = {
-    parent: TableEntity | null;
+    parent: TableContainer | null;
 };
 
 export class BaseTableEntity
@@ -13,13 +19,15 @@ export class BaseTableEntity
 {
     private readonly id: string;
     private readonly ref: TableRef;
-    private parent: TableEntity | null;
+    private parent: TableContainer | null;
+    private oldParent: TableContainer | null; //parent before deletion
     private props: TableEntityProps;
     private _isDestroyed: boolean;
 
     constructor({ parent = null }: Partial<BaseTableEntityConstructorParams> = {}) {
         super();
 
+        this.oldParent = null;
         this.parent = parent;
         this.ref = createRef();
         this.props = {};
@@ -33,7 +41,7 @@ export class BaseTableEntity
 
     static of<T extends typeof BaseTableEntity>(
         this: T,
-        parent: TableEntity
+        parent: TableContainer
     ): InstanceType<T> {
         return new this({ parent }) as InstanceType<T>;
     }
@@ -42,12 +50,19 @@ export class BaseTableEntity
         if (!this.isDestroyed()) return;
 
         this._isDestroyed = false;
+
+        if (this.oldParent) {
+            this.oldParent.addChild?.(this);
+            this.oldParent = null;
+        }
     }
 
     destroy() {
         if (this.isDestroyed()) return;
 
         this._isDestroyed = true;
+        this.oldParent = this.parent;
+        this.parent?.removeChild?.(this);
     }
 
     isDestroyed(): boolean {
@@ -58,7 +73,7 @@ export class BaseTableEntity
         return this.id;
     }
 
-    getParent(): TableEntity | null {
+    getParent(): TableContainer | null {
         return this.parent;
     }
 
@@ -66,7 +81,7 @@ export class BaseTableEntity
         return this.ref;
     }
 
-    setParent(parent: TableEntity | null): void {
+    setParent(parent: TableContainer | null): void {
         this.parent = parent;
     }
 

@@ -1,13 +1,13 @@
 import { CellModel, CellProps } from './cell';
 import { BodyModel } from './body';
 import { CreateChildParams } from '../types';
-import { BaseTableEntityWithChildren } from './entity-with-children';
+import { BaseTableContainer } from './table-container';
 
 export type RowProps = {
     index: number;
 };
 
-export class RowModel extends BaseTableEntityWithChildren {
+export class RowModel extends BaseTableContainer {
     getBody(): BodyModel {
         return super.getParent() as BodyModel;
     }
@@ -17,7 +17,7 @@ export class RowModel extends BaseTableEntityWithChildren {
     }
 
     getCellList(): CellModel[] {
-        return super.getChildren().asList() as CellModel[];
+        return super.getChildren() as CellModel[];
     }
 
     createCell(params?: CreateChildParams<CellProps>): CellModel {

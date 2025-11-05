@@ -1,10 +1,10 @@
 import { createContext, useCallback, useContext, useEffect } from 'react';
 import {
-    NullableTableEntityWithChildren,
+    NullableTableContainer,
+    TableEntity,
     TableEntityEvent,
     TableModel,
 } from '../../../models';
-import { TableEntity } from '../../../models/types';
 import { useLazyRef } from '../../../lib';
 import { TableLayout } from '../types';
 import { useEmitter } from './emitter';
@@ -38,8 +38,8 @@ export const useTableEntity = <T extends TableEntity>(
     return entity.current;
 };
 
-export const useTableEntityChildren = (entity: NullableTableEntityWithChildren) => {
-    const getChildren = useCallback(() => entity?.getChildren().asList(), [entity]);
+export const useTableEntityChildren = (entity: NullableTableContainer) => {
+    const getChildren = useCallback(() => entity?.getChildren(), [entity]);
 
     return useEmitter({
         event: TableEntityEvent.UPDATE_CHILDREN,

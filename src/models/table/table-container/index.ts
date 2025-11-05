@@ -1,24 +1,29 @@
 import { BaseTableEntity } from '../base';
 import { TableEntityChildren } from './table-entity-children';
-import { CreateChildParams, TableEntity, TableEntityEvent } from '../../types';
+import {
+    CreateChildParams,
+    TableContainer,
+    TableEntity,
+    TableEntityEvent,
+} from '../../types';
 
 export * from './table-entity-children';
 
-export class BaseTableEntityWithChildren extends BaseTableEntity {
+export class BaseTableContainer extends BaseTableEntity implements TableContainer {
     private children: TableEntityChildren = TableEntityChildren.empty();
 
-    getChildren(): TableEntityChildren {
-        return this.children;
+    getChildren(): TableEntity[] {
+        return this.children.asList();
     }
 
-    protected removeChild(child: TableEntity): void {
+    removeChild(child: TableEntity): void {
         this.children.remove(child);
 
         child.setParent(null);
         this.emit(TableEntityEvent.UPDATE_CHILDREN, { type: 'remove' });
     }
 
-    protected addChild(child: TableEntity): void {
+    addChild(child: TableEntity): void {
         this.children.add(child);
 
         child.setParent(this);

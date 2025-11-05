@@ -2,14 +2,14 @@ import { TableModel } from './table';
 import { HeaderCellModel, HeaderCellProps } from './header-cell';
 import { CellModel } from './cell';
 import { CreateChildParams } from '../types';
-import { BaseTableEntityWithChildren } from './entity-with-children';
+import { BaseTableContainer } from './table-container';
 import { CSSProperties } from 'react';
 
 export type HeaderProps = {
     cellWidthList?: string[];
 };
 
-export class HeaderModel extends BaseTableEntityWithChildren {
+export class HeaderModel extends BaseTableContainer {
     getGridColumnTemplateStyle(): CSSProperties {
         const widthList = this.getProps().cellWidthList || [];
         const gridTemplateColumns = widthList.reduce(
@@ -33,7 +33,7 @@ export class HeaderModel extends BaseTableEntityWithChildren {
     }
 
     getCellList(): HeaderCellModel[] {
-        return super.getChildren().asList() as HeaderCellModel[];
+        return super.getChildren() as HeaderCellModel[];
     }
 
     createCell(params?: CreateChildParams<HeaderCellProps>): HeaderCellModel {
