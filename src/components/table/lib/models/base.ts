@@ -4,7 +4,7 @@ import {
     TableEntityEvent,
     TableEntityProps,
     TableRef,
-} from '../types';
+} from './types';
 import { createRef, SetStateAction } from 'react';
 import EventEmitter from 'eventemitter3';
 import { nanoid } from 'nanoid';

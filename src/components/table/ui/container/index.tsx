@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { TableContext, tableContext } from '../../lib';
-import { TableModel } from '../../../../models';
+import { TableContext, tableContext, TableModel } from '../../lib';
 import cx from 'classnames';
 import s from './styles.module.scss';
 import { ContainerProps } from '../../types';

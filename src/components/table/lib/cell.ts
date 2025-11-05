@@ -1,6 +1,6 @@
 import { CSSProperties, useCallback } from 'react';
 import { useTableEntityProps } from './props';
-import { TableEntityProps } from '../../../models';
+import { TableEntityProps } from './models';
 import { useTableContext } from './context';
 
 type UseTableCellStyleParams = {

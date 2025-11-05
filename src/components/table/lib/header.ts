@@ -1,7 +1,7 @@
 import { CSSProperties, useCallback } from 'react';
 import { useTableContext } from './context';
 import { useTableEntityChildrenProps } from './props';
-import { HeaderCellProps } from '../../../models';
+import { HeaderCellProps } from './models';
 
 type UseTableRowStyleParams = {
     outerStyle?: CSSProperties;

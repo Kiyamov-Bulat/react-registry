@@ -1,6 +1,6 @@
 import { RowModel, RowProps } from './row';
 import { TableModel } from './table';
-import { CreateChildParams } from '../types';
+import { CreateChildParams } from './types';
 import { BaseTableContainer } from './table-container';
 
 export class BodyModel extends BaseTableContainer {

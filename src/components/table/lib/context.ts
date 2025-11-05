@@ -4,7 +4,7 @@ import {
     TableEntity,
     TableEntityEvent,
     TableModel,
-} from '../../../models';
+} from './models';
 import { useLazyRef } from '../../../lib';
 import { TableLayout } from '../types';
 import { useEmitter } from './emitter';

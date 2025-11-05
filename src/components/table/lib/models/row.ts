@@ -1,6 +1,6 @@
 import { CellModel, CellProps } from './cell';
 import { BodyModel } from './body';
-import { CreateChildParams } from '../types';
+import { CreateChildParams } from './types';
 import { BaseTableContainer } from './table-container';
 
 export type RowProps = {

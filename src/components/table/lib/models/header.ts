@@ -1,7 +1,7 @@
 import { TableModel } from './table';
 import { HeaderCellModel, HeaderCellProps } from './header-cell';
 import { CellModel } from './cell';
-import { CreateChildParams } from '../types';
+import { CreateChildParams } from './types';
 import { BaseTableContainer } from './table-container';
 import { CSSProperties } from 'react';
 

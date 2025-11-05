@@ -2,7 +2,7 @@ import {
     NullableTableEntity,
     NullableTableContainer,
     TableEntityEvent,
-} from '../../../models';
+} from './models';
 import { EmitterSelector, useEmitter } from './emitter';
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { useTableEntityChildren } from './context';
@@ -47,12 +47,10 @@ export const useTableEntityChildrenProps = <TTo>(
             const child = childList[i];
             const setStateWrapper = () => {
                 const update = () => {
-                    setState((prevState) => {
-                        const newPropsList = [...propsList];
+                    const newPropsList = [...propsList];
 
-                        newPropsList[i] = child.getProps() ?? newPropsList[i];
-                        return selector(newPropsList) ?? prevState;
-                    });
+                    newPropsList[i] = child.getProps();
+                    setState(selector(newPropsList));
                 };
 
                 queueMicrotask(update);

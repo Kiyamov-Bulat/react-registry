@@ -1,4 +1,4 @@
-import { NullableTableEntity } from '../../../models';
+import { NullableTableEntity } from './models';
 import { useLayoutEffect, useState } from 'react';
 
 export type EmitterSelector<T> = (...args: any[]) => T;
@@ -20,20 +20,18 @@ export const useEmitter = <T>({
     const [state, setState] = useState(initialState);
 
     useLayoutEffect(() => {
-        if (!enabled) return;
+        if (!enabled || !tableEntity) return;
 
         const setStateWrapper = (...args: unknown[]) => {
-            queueMicrotask(() =>
-                setState((prevState) => selector(...args) ?? prevState)
-            );
+            queueMicrotask(() => setState(selector(...args)));
         };
 
         setStateWrapper();
 
-        tableEntity?.on(event, setStateWrapper);
+        tableEntity.on(event, setStateWrapper);
 
         return () => {
-            tableEntity?.off(event, setStateWrapper);
+            tableEntity.off(event, setStateWrapper);
         };
     }, [enabled, event, tableEntity, selector]);
 

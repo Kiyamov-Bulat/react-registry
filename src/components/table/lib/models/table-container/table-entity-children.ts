@@ -1,4 +1,4 @@
-import { TableEntity } from '../../types';
+import { TableEntity } from '../types';
 
 export class TableEntityChildren {
     private children: Record<string, TableEntity> = {};

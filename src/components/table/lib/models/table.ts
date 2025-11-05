@@ -1,7 +1,7 @@
 import { BaseTableEntity } from './base';
 import { HeaderModel } from './header';
 import { BodyModel } from './body';
-import { TableContainer } from '../types';
+import { TableContainer } from './types';
 
 export class TableModel extends BaseTableEntity implements TableContainer {
     private header: HeaderModel = HeaderModel.of(this);

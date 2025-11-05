@@ -27,9 +27,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({
             ref={cellModel.getRef()}
             style={layoutMode === 'fixed' ? { width, ...style } : style}
             data-component={'header-cell'}
-            className={cx(className, {
-                [s.textEllipsis]: textEllipsis,
-            })}
+            className={cx(className, { [s.textEllipsis]: textEllipsis })}
             {...restProps}
         >
             {children}

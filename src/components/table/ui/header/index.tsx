@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { useTableEntity } from '../../lib';
+import { useTableEntity, useTableHeaderStyle } from '../../lib';
 import { HeaderProps } from '../../types';
-import { useTableHeaderStyle } from '../../lib/header';
 
 export const Header: FC<HeaderProps> = ({ style: outerStyle, ...restProps }) => {
     const headerModel = useTableEntity((tableModel) => tableModel.getHeader());

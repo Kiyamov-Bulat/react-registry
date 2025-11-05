@@ -5,7 +5,7 @@ import {
     TableContainer,
     TableEntity,
     TableEntityEvent,
-} from '../../types';
+} from '../types';
 
 export * from './table-entity-children';
 
