@@ -213,3 +213,30 @@ See it in action: https://react-registry-azure.vercel.app/
 
 ## 📄 License
 MIT © Kiyamov Bulat
+
+## 💙 Support the Project
+
+If React Registry saves you time, consider supporting its development!
+
+You can send a one-time payment in **USDT TRC20** and **TON** (The Open Network):
+
+- **USDT TRC20 Address**:  
+  ```
+  TC5a9vJtjYhpTq4wA4tAdHn4qnMskxfNq4
+  ```
+
+- **QR Code**:  
+  ![USDT QR](/public/images/wallet-qr-code/usdt-trc20.png)
+
+- **TON Address**:  
+  ```
+  UQDorrj6m414colWjOAxhT9qAsuSG_dWrR-7YxujVwDUSGSZ
+  ```
+
+- **QR Code**:  
+  ![TON](/public/images/wallet-qr-code/ton.png)
+  
+
+> After payment, feel free to email me with your transaction hash — I’ll prioritize your feature requests or help with integration.
+
+Thank you for your support! 🙏
