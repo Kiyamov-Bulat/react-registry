@@ -11,7 +11,7 @@ A lightweight, fully typed React component for building powerful data tables —
 - ✅ **Column sorting** — click a column header to sort
 - ✅ **Per-column filtering** — click the filter icon in any header to filter that column
 - ✅ **Fully typed** — TypeScript support included
-- ✅ **Minimum dependencies** — no heavy UI libraries
+- ✅ **Zero dependencies** — no heavy UI libraries
 - ✅ **Easy to customize** — clean, modular code
 - ✅ **Two usage modes**:
     - `Registry` — smart component (ready to use)
