@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { DATA, HEADERS } from '../../data';
 import s from './styles.module.scss';
 import cx from '@/lib/classnames';
-import { Table } from '../../../../src';
+import { Table } from '@/components';
 
 export const TableCompoundComponentRegistry: FC = () => {
     return (

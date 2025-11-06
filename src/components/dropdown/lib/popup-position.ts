@@ -1,6 +1,6 @@
 import { RefObject, useLayoutEffect, useState } from 'react';
 import { PopupAlign } from '../types';
-import { clamp } from '../../../lib/clamp';
+import { clamp } from '@/lib';
 
 type UsePopupPositionParams = {
     anchorRef: RefObject<HTMLElement | null>;

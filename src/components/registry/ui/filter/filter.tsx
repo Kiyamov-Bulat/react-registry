@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { Icon } from '../../../icon';
+import { Dropdown, Icon } from '@/components';
 import cx from '@/lib/classnames';
 import s from './styles.module.scss';
 import { FilterInput } from './filter-input';
-import { Dropdown } from '../../../dropdown';
 
 type FilterProps = {
     value: string;

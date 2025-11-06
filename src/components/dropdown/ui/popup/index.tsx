@@ -4,7 +4,7 @@ import { useDropdownContext } from '../../lib';
 import { usePopupPosition } from '../../lib/popup-position';
 import s from './styles.module.scss';
 import cx from '@/lib/classnames';
-import { useHotkey, useOutsideClick } from '../../../../lib';
+import { useHotkey, useOutsideClick } from '@/lib';
 import { createPortal } from 'react-dom';
 
 export const Popup: FC<PopupProps> = ({

@@ -1,7 +1,7 @@
-import { FC, useCallback, useId, useRef, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { DATA } from '../../data';
 import s from './styles.module.scss';
-import { Registry, RegistryHeader, SortDirection, Table } from '../../../../src';
+import { Registry, RegistryHeader, SortDirection, Table } from '@/components';
 import { ColumnPopup } from './column-popup';
 
 const getSortSymbol = (sortDir: SortDirection) => {

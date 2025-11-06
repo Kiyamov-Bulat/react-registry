@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, RefObject } from 'react';
 import { SortDropdownItem } from './sort-dropdown-item';
-import { Dropdown, SortDirection } from '../../../../../src';
-import { FilterInput } from '../../../../../src/components/registry/ui/filter/filter-input';
+import { Dropdown, SortDirection } from '@/components';
+import { FilterInput } from '@/components/registry/ui/filter';
 
 export type ColumnPopupProps = {
     children?: ReactNode;

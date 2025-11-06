@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect } from 'react';
 import { TableEntity, TableModel } from './models';
-import { useLazyRef } from '../../../lib';
+import { useLazyRef } from '@/lib';
 import { TableLayout } from '../types';
 
 export type TableContext = {

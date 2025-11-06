@@ -5,12 +5,15 @@ import {
     RenderHeaderCellInfo,
     WithId,
 } from '../types';
-import { useTableFilter, useTableSort } from '../lib';
+import {
+    getRegistryCellComponents,
+    getRegistryHeaderCellComponents,
+    useTableFilter,
+    useTableSort,
+} from '../lib';
 import { Table } from '../../table';
 import cx from '@/lib/classnames';
 import s from './styles.module.scss';
-import { getRegistryHeaderCellComponents } from '../lib/get-registry-header-cell-components';
-import { getRegistryCellComponents } from '../lib/get-registry-cell-components';
 
 export const Registry = <T extends WithId = WithId>({
     data,

@@ -1,4 +1,3 @@
-// hooks/useTableSort.ts
 import { useState, useMemo, useCallback } from 'react';
 import { SortDirection, SortState, UseTableSortOptions } from '../types';
 

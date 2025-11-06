@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import s from './styles.module.scss';
-import { Dropdown, Icon, SortDirection } from '../../../../../src';
+import { Dropdown, Icon, SortDirection } from '@/components';
 import cx from '@/lib/classnames';
 
 type SortDropdownItemProps = {

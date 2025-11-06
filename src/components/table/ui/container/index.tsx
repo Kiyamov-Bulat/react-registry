@@ -3,7 +3,7 @@ import { TableContext, tableContext, TableModel } from '../../lib';
 import cx from '@/lib/classnames';
 import s from './styles.module.scss';
 import { ContainerProps } from '../../types';
-import { useLazyRef } from '../../../../lib';
+import { useLazyRef } from '@/lib';
 
 export const Container: FC<ContainerProps> = ({
     variant,

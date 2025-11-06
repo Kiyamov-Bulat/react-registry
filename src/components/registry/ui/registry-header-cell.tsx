@@ -4,7 +4,7 @@ import { Table } from '../../table';
 import cx from '@/lib/classnames';
 import { RenderHeaderCellProps } from '../types';
 import { Icon } from '../../icon';
-import { Filter } from './filter/filter';
+import { Filter } from './filter';
 
 export const RegistryHeaderCell = <T extends object = object>({
     header,
