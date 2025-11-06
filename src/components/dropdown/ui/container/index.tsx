@@ -2,13 +2,9 @@ import { FC, useMemo, useRef, useState } from 'react';
 import { DropdownContext, dropdownContext } from '../../lib';
 import { DropdownProps } from '../../types';
 import s from './styles.module.scss';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 
-export const Container: FC<DropdownProps> = ({
-    children,
-    className,
-    ...props
-}) => {
+export const Container: FC<DropdownProps> = ({ children, className, ...props }) => {
     const anchorRef = useRef<HTMLDivElement>(null);
     const [opened, setOpened] = useState(false);
     const context = useMemo<DropdownContext>(

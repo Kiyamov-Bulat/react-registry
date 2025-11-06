@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TableContext, tableContext, TableModel } from '../../lib';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 import s from './styles.module.scss';
 import { ContainerProps } from '../../types';
 import { useLazyRef } from '../../../../lib';

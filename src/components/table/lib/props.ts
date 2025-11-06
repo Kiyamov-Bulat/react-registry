@@ -5,10 +5,12 @@ import {
 } from './models';
 import { EmitterSelector, useEmitter } from './emitter';
 import { useCallback, useLayoutEffect, useState } from 'react';
-import { useTableEntityChildren } from './context';
 
 type UseTableEntityPropsOptions<T> = {
     selector: EmitterSelector<T>;
+    enabled?: boolean;
+};
+type UseTableEntityChildrenOptions = {
     enabled?: boolean;
 };
 
@@ -29,11 +31,25 @@ export const useTableEntityProps = <TTo>(
     });
 };
 
+export const useTableEntityChildren = (
+    entity: NullableTableContainer,
+    { enabled }: UseTableEntityChildrenOptions = {}
+) => {
+    const getChildren = useCallback(() => entity?.getChildren(), [entity]);
+
+    return useEmitter({
+        event: TableEntityEvent.UPDATE_CHILDREN,
+        tableEntity: entity,
+        selector: getChildren,
+        enabled,
+    });
+};
+
 export const useTableEntityChildrenProps = <TTo>(
     tableEntity: NullableTableContainer,
     { enabled, selector }: UseTableEntityPropsOptions<TTo>
 ) => {
-    const childList = useTableEntityChildren(tableEntity);
+    const childList = useTableEntityChildren(tableEntity, { enabled });
     const getPropsList = () => childList?.map((child) => child.getProps());
     const [state, setState] = useState(() => selector(getPropsList()));
 

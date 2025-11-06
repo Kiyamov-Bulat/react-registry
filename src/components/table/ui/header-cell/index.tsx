@@ -2,7 +2,7 @@ import { FC, useLayoutEffect } from 'react';
 import { useTableContext, useTableEntity } from '../../lib';
 import { HeaderCellProps } from '../../types';
 import s from './styles.module.scss';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 
 export const HeaderCell: FC<HeaderCellProps> = ({
     index,

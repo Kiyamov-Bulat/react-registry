@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Icon } from '../../../icon';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 import s from './styles.module.scss';
 import { FilterInput } from './filter-input';
 import { Dropdown } from '../../../dropdown';

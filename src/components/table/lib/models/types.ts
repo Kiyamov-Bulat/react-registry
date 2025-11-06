@@ -1,5 +1,5 @@
 import { RefObject, SetStateAction } from 'react';
-import EventEmitter from 'eventemitter3';
+import { EventEmitter } from '@/lib';
 
 export type TableRef = RefObject<HTMLDivElement | null>;
 

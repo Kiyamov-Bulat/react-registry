@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { CellProps } from '../../types';
 import { useTableCellStyle, useTableEntity } from '../../lib';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 import s from './styles.module.scss';
 
 export const Cell: FC<CellProps> = ({

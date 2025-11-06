@@ -8,4 +8,9 @@ export default defineConfig({
     build: {
         outDir: path.join(__dirname, 'demo_dist'),
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+        },
+    },
 });

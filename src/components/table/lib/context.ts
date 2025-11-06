@@ -1,13 +1,7 @@
-import { createContext, useCallback, useContext, useEffect } from 'react';
-import {
-    NullableTableContainer,
-    TableEntity,
-    TableEntityEvent,
-    TableModel,
-} from './models';
+import { createContext, useContext, useEffect } from 'react';
+import { TableEntity, TableModel } from './models';
 import { useLazyRef } from '../../../lib';
 import { TableLayout } from '../types';
-import { useEmitter } from './emitter';
 
 export type TableContext = {
     tableModel: TableModel;
@@ -36,14 +30,4 @@ export const useTableEntity = <T extends TableEntity>(
     }, []);
 
     return entity.current;
-};
-
-export const useTableEntityChildren = (entity: NullableTableContainer) => {
-    const getChildren = useCallback(() => entity?.getChildren(), [entity]);
-
-    return useEmitter({
-        event: TableEntityEvent.UPDATE_CHILDREN,
-        tableEntity: entity,
-        selector: getChildren,
-    });
 };

@@ -6,8 +6,7 @@ import {
     TableRef,
 } from './types';
 import { createRef, SetStateAction } from 'react';
-import EventEmitter from 'eventemitter3';
-import { nanoid } from 'nanoid';
+import { EventEmitter, nanoid } from '@/lib';
 
 type BaseTableEntityConstructorParams = {
     parent: TableContainer | null;

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './styles.module.scss';
 import { Table } from '../../table';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 import { RenderHeaderCellProps } from '../types';
 import { Icon } from '../../icon';
 import { Filter } from './filter/filter';

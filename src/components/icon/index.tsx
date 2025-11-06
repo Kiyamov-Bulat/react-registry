@@ -1,5 +1,5 @@
 import { FC, SVGProps } from 'react';
-import cx from 'classnames';
+import cx from '@/lib/classnames';
 import s from './styles.module.scss';
 
 export interface IconProps extends SVGProps<SVGSVGElement> {
