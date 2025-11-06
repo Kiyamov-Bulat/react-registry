@@ -1,64 +1,53 @@
 {
-  "name": "react-registry",
-  "version": "0.1.0",
-  "description": "A lightweight, fully typed React component for building powerful data tables",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "private": true,
-  "peerDependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "@typescript-eslint/eslint-plugin": "^8.46.0",
-    "@typescript-eslint/parser": "^8.46.0",
-    "@vitejs/plugin-react": "^5.1.0",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.6.2",
-    "sass": "^1.93.2",
-    "typescript": "^5.9.3",
-    "vite": "^7.1.12",
-    "vite-plugin-css-injected-by-js": "^3.5.2",
-    "vite-plugin-dts": "^4.5.4"
-  },
-  "scripts": {
-    "build": "vite build --config vite.config.lib.ts",
-    "demo": "vite --config vite.config.dev.ts",
-    "demo:build": "vite build --config vite.config.dev.ts",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "ts": "tsc --noEmit"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  }
+    "name": "@bulak/react-registry",
+    "version": "0.1.0",
+    "description": "A lightweight, fully typed React component for building powerful data tables",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "files": ["dist"],
+    "private": false,
+    "peerDependencies": {
+        "react": ">=17",
+        "react-dom": ">=17"
+    },
+    "devDependencies": {
+        "@types/react": "^19.2.2",
+        "@types/react-dom": "^19.2.2",
+        "@typescript-eslint/eslint-plugin": "^8.46.0",
+        "@typescript-eslint/parser": "^8.46.0",
+        "@vitejs/plugin-react": "^5.1.0",
+        "eslint": "^8.57.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-react": "^7.37.5",
+        "prettier": "^3.6.2",
+        "sass": "^1.93.2",
+        "typescript": "^5.9.3",
+        "vite": "^7.1.12",
+        "vite-plugin-css-injected-by-js": "^3.5.2",
+        "vite-plugin-dts": "^4.5.4"
+    },
+    "scripts": {
+        "build": "vite build --config vite.config.lib.ts",
+        "demo": "vite --config vite.config.dev.ts",
+        "demo:build": "vite build --config vite.config.dev.ts",
+        "lint": "eslint 'src/**/*.{ts,tsx}'",
+        "ts": "tsc --noEmit"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Kiyamov-Bulat/react-registry"
+    },
+    "keywords": ["react", "table", "registry", "sorting", "filtering", "typescript", "ui", "ui-components"]
 }

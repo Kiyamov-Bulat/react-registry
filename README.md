@@ -22,11 +22,11 @@ A lightweight, fully typed React component for building powerful data tables —
 
 Install:
 ```bash
-npm install react-registry
+npm install @bulak/react-registry
 ```
 Basic usage (**Registry**):
 ```typescript jsx
-import { Registry, RegistryHeader } from 'react-registry';
+import { Registry, RegistryHeader } from '@bulak/react-registry';
 
 const DATA = [
     { id: 1, fullName: 'Harry Potter', employeeNumber: 1, age: 18 },
@@ -69,7 +69,7 @@ _💡 For full control, use the Table compound component and utility hooks (see 
 Override the default header to add a popup component and display sort direction symbols:
 
 ```typescript jsx
-import { Registry, RegistryHeader, SortDirection, Table } from 'react-registry';
+import { Registry, RegistryHeader, SortDirection, Table } from '@bulak/react-registry';
 import { DATA, HEADERS } from './constants';
 import { useCallback, useRef, useState } from 'react';
 import { ColumnPopup } from './column-popup';
@@ -157,7 +157,7 @@ _💡renderHeaderCell gives you full control over header rendering while keeping
 Build your own table layout using low-level components:
 
 ```typescript jsx
-import { Table, useTableSort } from 'react-registry';
+import { Table, useTableSort } from '@bulak/react-registry';
 import { DATA, HEADERS } from './constants';
 import s from './styles.module.scss';
 
