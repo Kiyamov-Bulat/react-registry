@@ -63,7 +63,8 @@ export const RegistryWithPopup: FC = () => {
                 Component: ({ header, ...props }) => {
                     const ref = useRef<HTMLDivElement>(null);
                     const [opened, setOpened] = useState(false);
-                    const toggle = useCallback(() => setOpened((prev) => !prev), []);
+                    const close = () => setOpened(false);
+                    const open = () => setOpened(true);
                     const filter = (value: string) =>
                         props.setFilter(header.key, value);
 
@@ -74,7 +75,7 @@ export const RegistryWithPopup: FC = () => {
                         <Table.HeaderCell
                             index={props.index}
                             width={header.width}
-                            onClick={toggle}
+                            onClick={open}
                         >
                             <div ref={ref} className={s.label}>
                                 {props.children}
@@ -84,7 +85,7 @@ export const RegistryWithPopup: FC = () => {
                                 {...props}
                                 onFilter={filter}
                                 onSort={sort}
-                                onClose={toggle}
+                                onClose={close}
                                 anchorRef={ref}
                                 opened={opened}
                             />
